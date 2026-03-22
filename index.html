@@ -3,9 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" sizes="120x120" rel="icon" href="assets/branding/GirloffsLogo.png">
     <title>Girloffs</title>
+    <style>
+        @font-face {
+            font-family: 'Girloffs';
+            src: url('assets/fonts/bold.otf') format('opentype');
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/branding/gradient2.png') center/cover no-repeat;
+        }
+        img {
+            width: min(300px, 60vw);
+        }
+        p {
+            font-family: 'Girloffs', sans-serif;
+            color: #fff;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
-    hi, coming soon
+    <img src="assets/branding/Girloffs2Logo.png" alt="Girloffs">
+    <p>Bracket Coming Soon</p>
 </body>
 </html>
