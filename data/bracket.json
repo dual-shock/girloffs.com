@@ -1,0 +1,396 @@
+{
+    "players": [
+        {
+            "name":"oxidiot",
+            "seed":1
+        },
+        {
+            "name":"tookannn",
+            "seed":2
+        },
+        {
+            "name":"CookieAddicts",
+            "seed":3
+        },
+        {
+            "name":"skylewl",
+            "seed":4
+        },
+        {
+            "name":"Czelco",
+            "seed":5
+        },
+        {
+            "name":"uglylosergirl",
+            "seed":6
+        },
+        {
+            "name":"wagasuner",
+            "seed":7
+        },
+        {
+            "name":"aleen",
+            "seed":8
+        },
+        {
+            "name":"iluvcobblestone",
+            "seed":9
+        },
+        {
+            "name":"ninathepig",
+            "seed":10
+        },
+        {
+            "name":"wagasylvie",
+            "seed":11
+        },
+        {
+            "name":"catpats",
+            "seed":12
+        },
+        {
+            "name":"sylvsunday",
+            "seed":13
+        },
+        {
+            "name":"QC_PUPPYNOISES",
+            "seed":14
+        },
+        {
+            "name":"rain_betwixt",
+            "seed":15
+        },
+        {
+            "name":"lowercase_b",
+            "seed":16
+        },
+        {
+            "name":"truecelfoid",
+            "seed":17
+        },
+        {
+            "name":"Dawn357x",
+            "seed":18
+        },
+        {
+            "name":"wmacc",
+            "seed":19
+        },
+        {
+            "name":"wagahpx",
+            "seed":20
+        },
+        {
+            "name":"eimiie",
+            "seed":21
+        },
+        {
+            "name":"rub_yy",
+            "seed":22
+        },
+        {
+            "name":"tigronyaa",
+            "seed":23
+        },
+        {
+            "name":"emnerson",
+            "seed":24
+        }
+    ],
+    "round_1" : [
+        {
+            "match_id":1,
+            "match_time":"",
+            "player_1":"lowercase_b",
+            "player_2":"truecelfoid",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":2,
+            "match_time":"",
+            "player_1":"iluvcobblestone",
+            "player_2":"emnerson",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":3,
+            "match_time":"",
+            "player_1":"sylvsunday",
+            "player_2":"wagahpx",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":4,
+            "match_time":"",
+            "player_1":"catpats",
+            "player_2":"eimiie",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":5,
+            "match_time":"",
+            "player_1":"rain_betwixt",
+            "player_2":"Dawn357x",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":6,
+            "match_time":"",
+            "player_1":"ninathepig",
+            "player_2":"tigronyaa",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":7,
+            "match_time":"",
+            "player_1":"QC_PUPPYNOISES",
+            "player_2":"wmacc",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":8,
+            "match_time":"",
+            "player_1":"wagasylvie",
+            "player_2":"rub_yy",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        }
+    ],
+    "round_2" : [
+        {
+            "match_id":9,
+            "match_time":"",
+            "player_1":"oxidiot",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":10,
+            "match_time":"",
+            "player_1":"aleen",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":11,
+            "match_time":"",
+            "player_1":"skylewl",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":12,
+            "match_time":"",
+            "player_1":"Czelco",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":13,
+            "match_time":"",
+            "player_1":"tookannn",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":14,
+            "match_time":"",
+            "player_1":"wagasuner",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":15,
+            "match_time":"",
+            "player_1":"CookieAddicts",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":16,
+            "match_time":"",
+            "player_1":"uglylosergirl",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        }
+    ],
+    "round_3" : [
+        {
+            "match_id":17,
+            "match_time":"",
+            "player_1":"",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":18,
+            "match_time":"",
+            "player_1":"",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":19,
+            "match_time":"",
+            "player_1":"",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":20,
+            "match_time":"",
+            "player_1":"",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        }
+    ],
+    "semis" : [
+        {
+            "match_id":21,
+            "match_time":"",
+            "player_1":"",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":22,
+            "match_time":"",
+            "player_1":"",
+            "player_2":"",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        }
+    ],
+    "bronze_final": {
+        "match_id":23,
+        "match_time":"",
+        "player_1":"",
+        "player_2":"",
+        "winner":"",
+        "link":"",
+        "score": {
+            "player_1": 0,
+            "player_2": 0
+        }
+    },
+    "final": {
+        "match_id":24,
+        "match_time":"",
+        "player_1":"",
+        "player_2":"",
+        "winner":"",
+        "link":"",
+        "score": {
+            "player_1": 0,
+            "player_2": 0
+        }
+    }
+}
