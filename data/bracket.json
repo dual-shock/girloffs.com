@@ -193,11 +193,11 @@
             },
             "player_1":"iluvcobblestone",
             "player_2":"emnerson",
-            "winner":"",
+            "winner":"iluvcobblestone",
             "link":"",
             "score": {
-                "player_1": 0,
-                "player_2": 0
+                "player_1": 2,
+                "player_2": 1
             }
         },
         {
@@ -283,10 +283,10 @@
             },
             "player_1":"wagasylvie",
             "player_2":"rub_yy",
-            "winner":"",
+            "winner":"wagasylvie",
             "link":"",
             "score": {
-                "player_1": 0,
+                "player_1": 2,
                 "player_2": 0
             }
         }
@@ -314,7 +314,7 @@
                 "utc_time":"17:30"
             },
             "player_1":"aleen",
-            "player_2":"",
+            "player_2":"iluvcobblestone",
             "winner":"",
             "link":"",
             "score": {
@@ -404,7 +404,7 @@
                 "utc_time":"16:45"
             },
             "player_1":"uglylosergirl",
-            "player_2":"",
+            "player_2":"wagasylvie",
             "winner":"",
             "link":"",
             "score": {
