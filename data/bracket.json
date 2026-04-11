@@ -238,11 +238,11 @@
             },
             "player_1":"rain_betwixt",
             "player_2":"Dawn357x",
-            "winner":"",
+            "winner":"rain_betwixt",
             "link":"",
             "score": {
-                "player_1": 0,
-                "player_2": 0
+                "player_1": 2,
+                "player_2": 1
             }
         },
         {
@@ -253,11 +253,11 @@
             },
             "player_1":"ninathepig",
             "player_2":"melevea",
-            "winner":"",
+            "winner":"melevea",
             "link":"",
             "score": {
                 "player_1": 0,
-                "player_2": 0
+                "player_2": 2
             }
         },
         {
@@ -268,11 +268,11 @@
             },
             "player_1":"QC_PUPPYNOISES",
             "player_2":"wmacc",
-            "winner":"",
+            "winner":"QC_PUPPYNOISES",
             "link":"",
             "score": {
-                "player_1": 0,
-                "player_2": 0
+                "player_1": 2,
+                "player_2": 1
             }
         },
         {
