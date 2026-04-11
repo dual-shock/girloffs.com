@@ -223,10 +223,10 @@
             },
             "player_1":"catpats",
             "player_2":"eimiie",
-            "winner":"",
+            "winner":"catpats",
             "link":"",
             "score": {
-                "player_1": 1,
+                "player_1": 2,
                 "player_2": 1
             }
         },
