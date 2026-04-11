@@ -4,39 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="image/png" sizes="120x120" rel="icon" href="assets/branding/GirloffsLogo.png">
+    <link rel="stylesheet" href="styles/main.css">
     <title>Girloffs</title>
     <style>
-        @font-face {
-            font-family: 'Girloffs';
-            src: url('assets/fonts/bold.otf') format('opentype');
+        body.loading {
+            overflow: hidden;
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            min-height: 100vh;
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: url('assets/branding/gradient3.png') center/cover no-repeat fixed, var(--hot-pink);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/branding/gradient2.png') center/cover no-repeat;
+            transition: opacity 0.4s;
         }
-        img {
-            width: min(300px, 60vw);
+        #loading-logo {
+            width: 180px;
+            max-width: 60vw;
+            opacity: 0.7;
+            animation: loading-flash 1.2s infinite alternate;
         }
-        p {
-            font-family: 'Girloffs', sans-serif;
-            color: #fff;
-            font-size: clamp(1.2rem, 4vw, 2rem);
-            margin-top: 1.5rem;
-            text-transform: uppercase;
+        @keyframes loading-flash {
+            0% { opacity: 0.7; }
+            100% { opacity: 0.15; }
+        }
+        body:not(.loading) #loading-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
         }
     </style>
 </head>
 <body>
-    <img src="assets/branding/Girloffs2Logo.png" alt="Girloffs">
-    <p>Bracket Coming Soon</p>
+        <div id="loading-overlay"><img id="loading-logo" src="assets/branding/Girloffs2Logo.png" alt="Girloffs loading..."></div>
+    <img alt="" class="ranked-icon-src" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAOHSURBVHhe7dxBahRBAIbRRLyAB3GRhdfxGIInEDyG13GRhQfxAoIm0EuZApuypvp7D0J6M9M9m4+B+pMHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADY0OPx+279fnFcwnYeXxyXd+nN8RsIEgAIEwAIEwAIEwAIEwAIEwAI234H8O7903EF/9/PH8/H1b9ZvRPwDQDCBADCBADCBADCBADCBADCBADCLr8D+PTt7XG1p68ffx1Xf7f75xtZ/flH9x8Z7QTsAIBlBADCBADCBADCBADCBADCBADC8juAz0/fj6s1vjx/OK7mOPv5zj7f6P6rP//o/nYAwGUJAIQJAIQJAIQJAIQJAIQJAITZAWx+Tj37+Wc/38jq57cDAC5LACBMACBMACBMACBMACBMACBMAFjq9Rz+1s/rOf6tH84RAAgTAAgTAAgTAAgTAAgTAAgTAAjz/wAWnyW/nnWfMXr+1e+/++v9PwDgsgQAwgQAwgQAwgQAwgQAwgQAwuwAJp+jj8w+555t9jn8yNnPbwcAZAkAhAkAhAkAhAkAhAkAhAkAhNkBXHwHMPucffXzjZy9vx0AcFkCAGECAGECAGECAGECAGECAGH5HQDcYgcAXJYAQJgAQJgAQJgAQJgAQJgAQJj/B7D536uPXj/b7s83YgcAXJYAQJgAQJgAQJgAQJgAQJgAQJgdwOQdwO7vf9bq5zt7fzsA4LIEAMIEAMIEAMIEAMIEAMIEAMLsAAbnxGetPuc+a/edgh3Abb4BQJgAQJgAQJgAQJgAQJgAQJgAQJgdwORz6t3f/yw7ADsA4E4JAIQJAIQJAIQJAIQJAIQJAITZAWx+Tm0HcJsdwG2+AUCYAECYAECYAECYAECYAECYAECYHcDkc+LZ9x+9frbdn2/EDgC4LAGAMAGAMAGAMAGAMAGAMAGAsPwO4KyzOwDWOnvOP2IHANwtAYAwAYAwAYAwAYAwAYAwAYCwy+8AYCU7AOBuCQCECQCECQCECQCECQCECQCEbb8DGLETYKbROf+IHQCwjABAmABAmABAmABAmABAmABA2N3vAEbO7gRgptXn/CO+AUCYAECYAECYAECYAECYAECYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALCRh4c/iV1wPU7yGDQAAAAASUVORK5CYII=">
+    <svg class="twitch-icon-src" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2800"><g><polygon class="st0" points="2200,1300 1800,1700 1400,1700 1050,2050 1050,1700 600,1700 600,200 2200,200  "/><g><g id="Layer_1-2"><path class="st1" d="M500,0L0,500v1800h600v500l500-500h400l900-900V0H500z M2200,1300l-400,400h-400l-350,350v-350H600V200h1600     V1300z"/><rect x="1700" y="550" class="st1" width="200" height="600"/><rect x="1150" y="550" class="st1" width="200" height="600"/></g></g></g></svg>
+    <svg class="twitch-icon-white-src" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2800"><g><g><path d="M500,0L0,500v1800h600v500l500-500h400l900-900V0H500z M2200,1300l-400,400h-400l-350,350v-350H600V200h1600 V1300z"/><rect x="1700" y="550" width="200" height="600"/><rect x="1150" y="550" width="200" height="600"/></g></g></svg>
+    
+    <header>
+        <img src="assets/branding/Girloffs2Logo.png" alt="Girloffs" class="logo">
+        <nav>
+            <a href="#bracket" class="active mc-shadow" data-text="Bracket">Bracket</a>
+            <a href="#schedule" class="mc-shadow" data-text="Schedule">Schedule</a>
+            <a href="#players" class="mc-shadow" data-text="Players">Players</a>
+            <a href="#results" class="mc-shadow" data-text="Results" style="opacity:60%;pointer-events: none;">Results</a>
+        </nav>
+        <div class="next-match-widget">
+            <div class="next-match-label mc-shadow" data-text="Next Match">Next Match</div>
+            <div class="pixel-box-shadow">
+                <div class="next-match-timer pixel-box" id="header-countdown"></div>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a class="twitch-link" target="_blank" rel="noopener">Live Now!</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="bracket" class="tab-content active">
+            <div class="bracket-scroll">
+                <div class="bracket" id="bracket-container"></div>
+            </div>
+        </section>
+        <section id="schedule" class="tab-content">
+            <div class="schedule-container" id="schedule-container"></div>
+        </section>
+        <section id="players" class="tab-content">
+            <div class="players-container" id="players-container"></div>
+        </section>
+        <section id="results" class="tab-content">Results</section>
+    </main>
+
+    <footer>
+        <a href="#">Twitch</a>
+        <a href="#">Twitter</a>
+        <div class="tz-selector-wrap">
+            <span class="tz-label">time shown in</span>
+            <select class="tz-select" id="tz-select"></select>
+        </div>
+    </footer>
+
+    <script>
+    document.body.classList.add('loading');
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            document.body.classList.remove('loading');
+        }, 200);
+    });
+    </script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>

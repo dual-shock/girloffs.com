@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'Minecraft Bold';
+    src: url('../assets/fonts/bold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Minecraft Regular';
+    src: url('../assets/fonts/regular.otf') format('opentype');
+}
+
+:root {
+    /* ? DEFAULT THEME*/
+    
+    --white: #FDFCFD;
+    --pale-pink: #FCA0B0;
+    --hot-pink: #ED68AD;
+
+    --primary-black:#;
+    --secondary-black:#;
+
+    --primary-orange:#;
+    --secondary-orange:#;
+
+    --primary-tangerine:#;
+    --secondary-tangerine:#;
+
+
+    /* ? GLOBAL SELECTION & HOVER */
+        --selection-border-color: var(--white);
+        --unselected-opacity: 0.85;
+        --unselected-brightness: 0.85;
+
+    /* ? BRACKET SCREEN*/
+        /* BRACKET LINES */
+        --bracket-line-color: #fdfcfda1;
+
+        /* SEED NUMBERS */
+        --seed-color: rgba(255, 255, 255, 0.5);
+        --player-seed-color: rgba(255, 255, 255, 0.5);
+
+        /* TBD TEXT */
+        --tbd-color: rgba(255, 255, 255, 0.4);
+
+        /* NAME COLORS */
+        --name-color: var(--white);
+        --name-ongoing-color: #FDFCFD;
+        --name-winner-color: #FDFCFD;
+        --name-loser-color: #fdfcfda1;
+
+        /* NAME CELL BACKGROUNDS */
+        --name-bg: #333;
+        --name-ongoing-bg: #eb9ca9a7;
+
+        --name-winner-bg: #8f4a6de0;
+
+        --name-loser-bg: #353232cd;
+
+        /* SCORE CELL BACKGROUNDS */
+        --score-bg: #444;
+        --score-ongoing-bg: #FCA0B0;
+
+        --winner-score-bg:#ED68AD; 
+        
+        --score-loser-bg: #444444ce;
+
+        /* SCORE DIGIT COLORS */
+        --score-winner-color: #FDFCFD;
+        --score-loser-color: rgba(255, 255, 255, 0.576);
+  
+
+        /* HOVER EFFECTS */
+        --name-hover-bg: #444;
+        --score-hover-bg: #555;
+
+        --winner-hover-bg: #ae698bd3;
+        --winner-score-hover-bg: #ef83bbe8;
+
+        --name-loser-hover-bg: #504b4bcd;
+        --score-loser-hover-bg: rgba(85, 85, 85, 0.6);
+
+        /* ONGOING HOVER COLORS */
+        --name-ongoing-hover-bg: #ffacbca7;
+        --score-ongoing-hover-bg: #ecaeb8;
+
+        /* WINNER HOVER COLORS */
+        --winner-hover-bg: #ae698bd3;
+        --winner-score-hover-bg: #ef83bbe8;
+
+        /* LOSER HOVER COLORS */
+        --score-loser-hover-bg: #55555599;
+
+    /* ? SCHEDULE SCREEN */
+        /* DEFAULT (set time/players, not ongoing or next) */
+        --schedule-time-bg: var(--white);
+        --schedule-time-color: var(--hot-pink);
+        --schedule-bar-bg: rgba(51, 51, 51, 0.85);
+        --schedule-bar-color: var(--white);
+        --schedule-bar-hover-bg: rgba(71, 71, 71, 0.85);
+
+        /* TBD (no players and no time set) */
+        --schedule-tbd-time-bg: rgba(253, 252, 253, 0.35);
+        --schedule-tbd-time-color: rgba(237, 104, 173, 0.5);
+        --schedule-tbd-bar-bg: rgba(51, 51, 51, 0.4);
+        --schedule-tbd-bar-color: rgba(255, 255, 255, 0.4);
+        --schedule-tbd-bar-hover-bg: rgba(71, 71, 71, 0.5);
+
+        /* ONGOING */
+        --schedule-ongoing-time-bg: var(--white);
+        --schedule-ongoing-time-color: var(--hot-pink);
+        --schedule-ongoing-bar-bg: #eb9ca9a7;
+        --schedule-ongoing-bar-color: #FDFCFD;
+        --schedule-ongoing-bar-hover-bg: #ffacbca7;
+        --schedule-ongoing-status-color: #FDFCFD;
+
+        /* NEXT MATCH */
+        --schedule-next-time-bg: var(--white);
+        --schedule-next-time-color: var(--hot-pink);
+        --schedule-next-bar-bg: rgba(113, 69, 99, 0.85);
+        --schedule-next-bar-color: var(--white);
+        --schedule-next-bar-hover-bg: rgba(100, 65, 88, 0.85);
+        --schedule-next-status-color: var(--hot-pink);
+
+    /* ? PLAYERS SCREEN */
+        --player-bg: #333;
+        --player-hover-bg: #3d3d3d;
+
+    /* ? HEADER */
+        /* NAV LINKS */
+        --nav-color: #fdfcfdd5;
+        --nav-active-color: #fdfcfd;
+        --nav-hover-color: #fdfcfdf1;
+
+        /* TWITCH LINK */
+        --twitch-link-color: var(--white);
+        --twitch-link-hover-color: var(--pale-pink);
+
+        --twitch-link-live-color: #fdfcfdd5; 
+        --twitch-link-live-hover-color: #fdfcfdf1;
+
+        --twitch-link-offline-color: #fdfcfda3; 
+        --twitch-link-offline-hover-color: #fdfcfdb9;
+
+    /* ? FOOTER */
+        --footer-link-color: #fdfcfd;
+        --footer-link-hover-color: #fbb4c0;
+}

@@ -1,106 +1,181 @@
-{
+{    
     "players": [
         {
             "name":"oxidiot",
-            "seed":1
+            "seed":1,
+            "pref_name":"oxidiot",
+            "twitch":"oxidiot",
+            "pronouns":"she/they"
         },
         {
             "name":"tookannn",
-            "seed":2
+            "seed":2,
+            "pref_name":"tookann",
+            "twitch":"tookann",
+            "pronouns":"she/they"
         },
         {
             "name":"CookieAddicts",
-            "seed":3
+            "seed":3,
+            "pref_name":"Cookie",
+            "twitch":"cookieaddictss",
+            "pronouns":"she/her"
         },
         {
             "name":"skylewl",
-            "seed":4
+            "seed":4,
+            "pref_name":"skylewl",
+            "twitch":"skylewl",
+            "pronouns":"any"
         },
         {
             "name":"Czelco",
-            "seed":5
+            "seed":5,
+            "pref_name":"Czelco",
+            "twitch":"czelco",
+            "pronouns":"she/her"
         },
         {
             "name":"uglylosergirl",
-            "seed":6
+            "seed":6,
+            "pref_name":"shojan",
+            "twitch":"shojan",
+            "pronouns":"she/her"
         },
         {
             "name":"wagasuner",
-            "seed":7
+            "seed":7,
+            "pref_name":"Suner",
+            "twitch":"lakersuner",
+            "pronouns":"she/any"
         },
         {
             "name":"aleen",
-            "seed":8
+            "seed":8,
+            "pref_name":"aleen",
+            "twitch":"aleenswag",
+            "pronouns":"she/her"
         },
         {
             "name":"iluvcobblestone",
-            "seed":9
+            "seed":9,
+            "pref_name":"cobble",
+            "twitch":"iluvcobblestone",
+            "pronouns":"she/her"
         },
         {
             "name":"ninathepig",
-            "seed":10
+            "seed":10,
+            "pref_name":"Nina",
+            "twitch":"ninathepig",
+            "pronouns":"she/her"
         },
         {
             "name":"wagasylvie",
-            "seed":11
+            "seed":11,
+            "pref_name":"sylvie",
+            "twitch":"sylvie0616",
+            "pronouns":"she/her"
         },
         {
             "name":"catpats",
-            "seed":12
+            "seed":12,
+            "pref_name":"sonya",
+            "twitch":"chicoryroot",
+            "pronouns":"she/her"
         },
         {
             "name":"sylvsunday",
-            "seed":13
+            "seed":13,
+            "pref_name":"sylvsunday",
+            "twitch":"sylvsunday",
+            "pronouns":"she/her"
         },
         {
             "name":"QC_PUPPYNOISES",
-            "seed":14
+            "seed":14,
+            "pref_name":"May",
+            "twitch":"puppymay",
+            "pronouns":"she/it"
         },
         {
             "name":"rain_betwixt",
-            "seed":15
+            "seed":15,
+            "pref_name":"rain",
+            "twitch":"rain_betwixt",
+            "pronouns":"they/she/it"
         },
         {
             "name":"lowercase_b",
-            "seed":16
+            "seed":16,
+            "pref_name":"bea",
+            "twitch":"lowercase_bea",
+            "pronouns":"she/her"
         },
         {
             "name":"truecelfoid",
-            "seed":17
+            "seed":17,
+            "pref_name":"nat",
+            "twitch":"n_at__",
+            "pronouns":"she/her"
         },
         {
             "name":"Dawn357x",
-            "seed":18
+            "seed":18,
+            "pref_name":"dawn",
+            "twitch":"dawn357x",
+            "pronouns":"she/her"
         },
         {
             "name":"wmacc",
-            "seed":19
+            "seed":19,
+            "pref_name":"Mac",
+            "twitch":"wmaccc_",
+            "pronouns":"she/they"
         },
         {
             "name":"wagahpx",
-            "seed":20
+            "seed":20,
+            "pref_name":"hpx",
+            "twitch":"hpx374",
+            "pronouns":"she/her"
         },
         {
             "name":"eimiie",
-            "seed":21
+            "seed":21,
+            "pref_name":"eimiie",
+            "twitch":"eimiiie",
+            "pronouns":"she/her"
         },
         {
             "name":"rub_yy",
-            "seed":22
+            "seed":22,
+            "pref_name":"ruby",
+            "twitch":"rubycolonthree",
+            "pronouns":"she/it"
         },
         {
-            "name":"tigronyaa",
-            "seed":23
+            "name":"melevea",
+            "seed":23,
+            "pref_name":"river",
+            "twitch":"melecat",
+            "pronouns":"she/they"
         },
         {
             "name":"emnerson",
-            "seed":24
+            "seed":24,
+            "pref_name":"emnerson",
+            "twitch":"emnerson",
+            "pronouns":"she/her"
         }
     ],
     "round_1" : [
         {
             "match_id":1,
-            "match_time":"",
+            "match_time":{
+                "day":1,
+                "utc_time":"17:30"
+            },
             "player_1":"lowercase_b",
             "player_2":"truecelfoid",
             "winner":"",
@@ -112,7 +187,10 @@
         },
         {
             "match_id":2,
-            "match_time":"",
+            "match_time":{
+                "day":1,
+                "utc_time":"18:15"
+            },
             "player_1":"iluvcobblestone",
             "player_2":"emnerson",
             "winner":"",
@@ -124,7 +202,10 @@
         },
         {
             "match_id":3,
-            "match_time":"",
+            "match_time":{
+                "day":1,
+                "utc_time":"16:00"
+            },
             "player_1":"sylvsunday",
             "player_2":"wagahpx",
             "winner":"",
@@ -136,7 +217,10 @@
         },
         {
             "match_id":4,
-            "match_time":"",
+            "match_time":{
+                "day":1,
+                "utc_time":"16:45"
+            },
             "player_1":"catpats",
             "player_2":"eimiie",
             "winner":"",
@@ -148,7 +232,10 @@
         },
         {
             "match_id":5,
-            "match_time":"",
+            "match_time":{
+                "day":1,
+                "utc_time":"19:45"
+            },
             "player_1":"rain_betwixt",
             "player_2":"Dawn357x",
             "winner":"",
@@ -160,9 +247,12 @@
         },
         {
             "match_id":6,
-            "match_time":"",
+            "match_time":{
+                "day":1,
+                "utc_time":"21:15"
+            },
             "player_1":"ninathepig",
-            "player_2":"tigronyaa",
+            "player_2":"melevea",
             "winner":"",
             "link":"",
             "score": {
@@ -172,7 +262,10 @@
         },
         {
             "match_id":7,
-            "match_time":"",
+            "match_time":{
+                "day":1,
+                "utc_time":"20:30"
+            },
             "player_1":"QC_PUPPYNOISES",
             "player_2":"wmacc",
             "winner":"",
@@ -184,7 +277,10 @@
         },
         {
             "match_id":8,
-            "match_time":"",
+            "match_time":{
+                "day":1,
+                "utc_time":"19:00"
+            },
             "player_1":"wagasylvie",
             "player_2":"rub_yy",
             "winner":"",
@@ -198,7 +294,10 @@
     "round_2" : [
         {
             "match_id":9,
-            "match_time":"",
+            "match_time":{
+                "day":2,
+                "utc_time":"16:00"
+            },
             "player_1":"oxidiot",
             "player_2":"",
             "winner":"",
@@ -210,7 +309,10 @@
         },
         {
             "match_id":10,
-            "match_time":"",
+            "match_time":{
+                "day":2,
+                "utc_time":"17:30"
+            },
             "player_1":"aleen",
             "player_2":"",
             "winner":"",
@@ -222,7 +324,10 @@
         },
         {
             "match_id":11,
-            "match_time":"",
+            "match_time":{
+                "day":2,
+                "utc_time":"18:15"
+            },
             "player_1":"skylewl",
             "player_2":"",
             "winner":"",
@@ -234,7 +339,10 @@
         },
         {
             "match_id":12,
-            "match_time":"",
+            "match_time":{
+                "day":2,
+                "utc_time":"19:00"
+            },
             "player_1":"Czelco",
             "player_2":"",
             "winner":"",
@@ -246,7 +354,10 @@
         },
         {
             "match_id":13,
-            "match_time":"",
+            "match_time":{
+                "day":2,
+                "utc_time":"21:15"
+            },
             "player_1":"tookannn",
             "player_2":"",
             "winner":"",
@@ -258,7 +369,10 @@
         },
         {
             "match_id":14,
-            "match_time":"",
+            "match_time":{
+                "day":2,
+                "utc_time":"19:45"
+            },
             "player_1":"wagasuner",
             "player_2":"",
             "winner":"",
@@ -270,7 +384,10 @@
         },
         {
             "match_id":15,
-            "match_time":"",
+            "match_time":{
+                "day":2,
+                "utc_time":"20:30"
+            },
             "player_1":"CookieAddicts",
             "player_2":"",
             "winner":"",
@@ -282,7 +399,10 @@
         },
         {
             "match_id":16,
-            "match_time":"",
+            "match_time":{
+                "day":2,
+                "utc_time":"16:45"
+            },
             "player_1":"uglylosergirl",
             "player_2":"",
             "winner":"",
@@ -296,7 +416,10 @@
     "round_3" : [
         {
             "match_id":17,
-            "match_time":"",
+            "match_time":{
+                "day":3,
+                "utc_time":""
+            },
             "player_1":"",
             "player_2":"",
             "winner":"",
@@ -308,7 +431,10 @@
         },
         {
             "match_id":18,
-            "match_time":"",
+            "match_time":{
+                "day":3,
+                "utc_time":""
+            },
             "player_1":"",
             "player_2":"",
             "winner":"",
@@ -320,7 +446,10 @@
         },
         {
             "match_id":19,
-            "match_time":"",
+            "match_time":{
+                "day":3,
+                "utc_time":""
+            },
             "player_1":"",
             "player_2":"",
             "winner":"",
@@ -332,7 +461,10 @@
         },
         {
             "match_id":20,
-            "match_time":"",
+            "match_time":{
+                "day":3,
+                "utc_time":""
+            },
             "player_1":"",
             "player_2":"",
             "winner":"",
@@ -346,7 +478,10 @@
     "semis" : [
         {
             "match_id":21,
-            "match_time":"",
+            "match_time":{
+                "day":4,
+                "utc_time":""
+            },
             "player_1":"",
             "player_2":"",
             "winner":"",
@@ -358,7 +493,10 @@
         },
         {
             "match_id":22,
-            "match_time":"",
+            "match_time":{
+                "day":4,
+                "utc_time":""
+            },
             "player_1":"",
             "player_2":"",
             "winner":"",
@@ -371,7 +509,10 @@
     ],
     "bronze_final": {
         "match_id":23,
-        "match_time":"",
+        "match_time":{
+            "day":4,
+            "utc_time":""
+        },
         "player_1":"",
         "player_2":"",
         "winner":"",
@@ -383,7 +524,10 @@
     },
     "final": {
         "match_id":24,
-        "match_time":"",
+        "match_time":{
+            "day":4,
+            "utc_time":""
+        },
         "player_1":"",
         "player_2":"",
         "winner":"",
