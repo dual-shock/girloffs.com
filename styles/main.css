@@ -774,8 +774,9 @@ main.players-bg::after {
     align-items: stretch;
     background: var(--player-bg);
     min-width: 0;
+    min-height: 0;
+    overflow: hidden;
     cursor: pointer;
-
 }
 
 .player-avatar {
