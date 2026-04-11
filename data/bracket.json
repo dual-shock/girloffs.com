@@ -178,11 +178,11 @@
             },
             "player_1":"lowercase_bea",
             "player_2":"truecelfoid",
-            "winner":"",
+            "winner":"lowercase_bea",
             "link":"",
             "score": {
-                "player_1": 0,
-                "player_2": 0
+                "player_1": 2,
+                "player_2": 1
             }
         },
         {
@@ -299,7 +299,7 @@
                 "utc_time":"16:00"
             },
             "player_1":"oxidiot",
-            "player_2":"",
+            "player_2":"lowercase_bea",
             "winner":"",
             "link":"",
             "score": {
