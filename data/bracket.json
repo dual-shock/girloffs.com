@@ -390,10 +390,10 @@
             },
             "player_1":"CookieAddicts",
             "player_2":"QC_PUPPYNOISES",
-            "winner":"",
+            "winner":"CookieAddicts",
             "link":"",
             "score": {
-                "player_1": 1,
+                "player_1": 2,
                 "player_2": 0
             }
         },
@@ -465,7 +465,7 @@
                 "day":3,
                 "utc_time":""
             },
-            "player_1":"",
+            "player_1":"CookieAddicts",
             "player_2":"uglylosergirl",
             "winner":"",
             "link":"",
