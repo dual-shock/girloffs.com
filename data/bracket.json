@@ -315,11 +315,11 @@
             },
             "player_1":"aleen",
             "player_2":"iluvcobblestone",
-            "winner":"",
+            "winner":"iluvcobblestone",
             "link":"",
             "score": {
                 "player_1": 0,
-                "player_2": 0
+                "player_2": 2
             }
         },
         {
@@ -421,7 +421,7 @@
                 "utc_time":""
             },
             "player_1":"oxidiot",
-            "player_2":"",
+            "player_2":"iluvcobblestone",
             "winner":"",
             "link":"",
             "score": {
