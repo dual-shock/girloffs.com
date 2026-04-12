@@ -48,17 +48,29 @@ function rebuildTwitchLink() {
     link.appendChild(svg);
 }
 
+function activateTab(hash) {
+    var validTabs = ['#bracket', '#schedule', '#players', '#results'];
+    if (validTabs.indexOf(hash) === -1) return;
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
+    var navLink = document.querySelector('nav a[href="' + hash + '"]');
+    if (navLink) navLink.classList.add('active');
+    var section = document.querySelector(hash);
+    if (section) section.classList.add('active');
+    document.querySelector('main').classList.toggle('players-bg', hash === '#players');
+    document.querySelector('main').classList.toggle('schedule-bg', hash === '#schedule');
+}
+
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
-        link.classList.add('active');
-        document.querySelector(link.getAttribute('href')).classList.add('active');
-        document.querySelector('main').classList.toggle('players-bg', link.getAttribute('href') === '#players');
-        document.querySelector('main').classList.toggle('schedule-bg', link.getAttribute('href') === '#schedule');
+        activateTab(link.getAttribute('href'));
     });
 });
+
+if (window.location.hash) {
+    activateTab(window.location.hash);
+}
 
 const ROUND_KEYS = ['round_1', 'round_2', 'round_3', 'semis', 'final'];
 const ROUND_LABELS = ['Round 1', 'Round 2', 'Quarterfinals', 'Semifinals', 'Final'];

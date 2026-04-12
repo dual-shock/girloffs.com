@@ -8,6 +8,9 @@
 html, body {
     padding:0;
 }
+html {
+    background-color: var(--hot-pink);
+}
 body {
     height: 100vh;
     height: 100dvh;
@@ -218,7 +221,7 @@ main::before {
     position: absolute;
     inset: 0;
     background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-                url('../assets/branding/gradient4.png') center/cover no-repeat;
+                url('../assets/branding/gradient4-720p.png') center/cover no-repeat #7ec8d4;
     box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -231,7 +234,7 @@ main::after {
     position: absolute;
     inset: 0;
     background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-                url('../assets/branding/gradient2.png') center/cover no-repeat;
+                url('../assets/branding/gradient2-720p.png') center/cover no-repeat #a830d0;
     box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -765,8 +768,7 @@ main.players-bg::after {
 .player-item {
     display: flex;
     align-items: stretch;
-    min-height: 0;
-    min-width: 0;
+    min-height: 48px;
 }
 
 .player-item-content {
@@ -968,6 +970,11 @@ footer a:hover {
         gap: clamp(0.5rem, 0.7vw, 1.2rem);
     }
 
+    .player-item {
+        min-height: 0;
+        min-width: 0;
+    }
+
     .player-info {
         padding: clamp(2px, 0.4vw, 8px) clamp(8px, 0.8vw, 16px);
     }
@@ -1134,6 +1141,9 @@ footer a:hover {
         grid-template-columns: repeat(2, 1fr);
         overflow-y: auto;
         gap: 0.75rem;
+    }
+    .player-item {
+        min-width: 0;
     }
     .player-item-seed {
         font-size: clamp(1.2rem, 3vw, 2rem);
