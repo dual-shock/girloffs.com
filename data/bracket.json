@@ -360,10 +360,10 @@
             },
             "player_1":"tookannn",
             "player_2":"rain_betwixt",
-            "winner":"",
+            "winner":"tookannn",
             "link":"",
             "score": {
-                "player_1": 1,
+                "player_1": 2,
                 "player_2": 0
             }
         },
