@@ -330,10 +330,10 @@
             },
             "player_1":"skylewl",
             "player_2":"wagahpx",
-            "winner":"",
+            "winner":"skylewl",
             "link":"",
             "score": {
-                "player_1": 1,
+                "player_1": 2,
                 "player_2": 0
             }
         },
@@ -435,7 +435,7 @@
                 "day":3,
                 "utc_time":""
             },
-            "player_1":"",
+            "player_1":"skylewl",
             "player_2":"",
             "winner":"",
             "link":"",
