@@ -65,6 +65,7 @@ document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
         activateTab(link.getAttribute('href'));
+        if (link.getAttribute('href') === '#bracket') drawBracketLines();
     });
 });
 
