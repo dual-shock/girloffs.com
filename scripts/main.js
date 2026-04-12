@@ -291,7 +291,7 @@ fetchBracket().then(function(data) {
             bracketData = fresh;
             applyUpdate(fresh);
         });
-    }, 60000);
+    }, 20000);
 });
 
 function createMatch(match, playerMap) {
