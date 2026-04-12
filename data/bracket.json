@@ -300,10 +300,10 @@
             },
             "player_1":"oxidiot",
             "player_2":"lowercase_bea",
-            "winner":"",
+            "winner":"oxidiot",
             "link":"",
             "score": {
-                "player_1": 0,
+                "player_1": 2,
                 "player_2": 0
             }
         },
@@ -420,7 +420,7 @@
                 "day":3,
                 "utc_time":""
             },
-            "player_1":"",
+            "player_1":"oxidiot",
             "player_2":"",
             "winner":"",
             "link":"",
