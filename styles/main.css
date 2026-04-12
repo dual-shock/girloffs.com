@@ -755,16 +755,18 @@ main.players-bg::after {
 .players-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
     gap: 0.5rem;
     padding: 1rem;
     height: 100%;
-    align-content: stretch;
+    overflow: hidden;
 }
 
 .player-item {
     display: flex;
     align-items: stretch;
-    min-height: 48px;
+    min-height: 0;
+    min-width: 0;
 }
 
 .player-item-content {
@@ -773,6 +775,8 @@ main.players-bg::after {
     align-items: stretch;
     background: var(--player-bg);
     min-width: 0;
+    min-height:0;
+    overflow:hidden;
     cursor: pointer;
 
 }
@@ -827,6 +831,7 @@ main.players-bg::after {
 
 .player-twitch-link svg {
     height: 100%;
+    max-height: 80px;
     aspect-ratio: 1;
     display: block;
     padding: 19%;
@@ -844,6 +849,7 @@ main.players-bg::after {
 
 .player-ranked-link img {
     height: 100%;
+    max-height: 80px;
     aspect-ratio: 1;
     object-fit: contain;
 }
@@ -1267,4 +1273,3 @@ footer a:hover {
         font-size: clamp(1rem, 1.75vh, 2rem);
     }
 }
-
