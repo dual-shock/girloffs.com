@@ -208,11 +208,11 @@
             },
             "player_1":"sylvsunday",
             "player_2":"wagahpx",
-            "winner":"sylvsunday",
+            "winner":"wagahpx",
             "link":"",
             "score": {
-                "player_1": 2,
-                "player_2": 1
+                "player_1": 0,
+                "player_2": 2
             }
         },
         {
@@ -329,7 +329,7 @@
                 "utc_time":"18:15"
             },
             "player_1":"skylewl",
-            "player_2":"sylvsunday",
+            "player_2":"wagahpx",
             "winner":"",
             "link":"",
             "score": {
