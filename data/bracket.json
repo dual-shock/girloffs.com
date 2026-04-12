@@ -375,10 +375,10 @@
             },
             "player_1":"wagasuner",
             "player_2":"melevea",
-            "winner":"",
+            "winner":"wagasuner",
             "link":"",
             "score": {
-                "player_1": 1,
+                "player_1": 2,
                 "player_2": 0
             }
         },
