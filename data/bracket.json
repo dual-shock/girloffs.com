@@ -345,10 +345,10 @@
             },
             "player_1":"Czelco",
             "player_2":"catpats",
-            "winner":"",
+            "winner":"Czelco",
             "link":"",
             "score": {
-                "player_1": 1,
+                "player_1": 2,
                 "player_2": 0
             }
         },
@@ -436,7 +436,7 @@
                 "utc_time":""
             },
             "player_1":"skylewl",
-            "player_2":"",
+            "player_2":"Czelco",
             "winner":"",
             "link":"",
             "score": {
