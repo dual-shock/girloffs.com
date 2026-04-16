@@ -36,7 +36,7 @@
             "pronouns":"she/her"
         },
         {
-            "name":"uglylosergirl",
+            "name":"sh0jan",
             "seed":6,
             "pref_name":"shojan",
             "twitch":"shojan",
@@ -92,7 +92,7 @@
             "pronouns":"she/her"
         },
         {
-            "name":"QC_PUPPYNOISES",
+            "name":"PuppyMay",
             "seed":14,
             "pref_name":"May",
             "twitch":"puppymay",
@@ -266,9 +266,9 @@
                 "day":1,
                 "utc_time":"20:30"
             },
-            "player_1":"QC_PUPPYNOISES",
+            "player_1":"PuppyMay",
             "player_2":"wmacc",
-            "winner":"QC_PUPPYNOISES",
+            "winner":"PuppyMay",
             "link":"",
             "score": {
                 "player_1": 2,
@@ -389,8 +389,8 @@
                 "utc_time":"20:30"
             },
             "player_1":"CookieAddicts",
-            "player_2":"QC_PUPPYNOISES",
-            "winner":"QC_PUPPYNOISES",
+            "player_2":"PuppyMay",
+            "winner":"PuppyMay",
             "link":"",
             "score": {
                 "player_1": 2,
@@ -403,9 +403,9 @@
                 "day":2,
                 "utc_time":"18:15"
             },
-            "player_1":"uglylosergirl",
+            "player_1":"sh0jan",
             "player_2":"wagasylvie",
-            "winner":"uglylosergirl",
+            "winner":"sh0jan",
             "link":"",
             "score": {
                 "player_1": 2,
@@ -465,8 +465,8 @@
                 "day":3,
                 "utc_time":"19:30"
             },
-            "player_1":"QC_PUPPYNOISES",
-            "player_2":"uglylosergirl",
+            "player_1":"PuppyMay",
+            "player_2":"sh0jan",
             "winner":"",
             "link":"",
             "score": {
