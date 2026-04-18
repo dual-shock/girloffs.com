@@ -467,11 +467,11 @@
             },
             "player_1":"PuppyMay",
             "player_2":"sh0jan",
-            "winner":"",
+            "winner":"sh0jan",
             "link":"",
             "score": {
                 "player_1": 1,
-                "player_2": 2
+                "player_2": 3
             }
         }
     ],
@@ -498,7 +498,7 @@
                 "utc_time":""
             },
             "player_1":"wagasuner",
-            "player_2":"",
+            "player_2":"sh0jan",
             "winner":"",
             "link":"",
             "score": {
