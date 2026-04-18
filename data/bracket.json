@@ -1,4 +1,66 @@
 {    
+    "semis" : [
+        {
+            "match_id":21,
+            "match_time":{
+                "day":4,
+                "utc_time":"16:00"
+            },
+            "player_1":"oxidiot",
+            "player_2":"Czelco",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        },
+        {
+            "match_id":22,
+            "match_time":{
+                "day":4,
+                "utc_time":"17:10"
+            },
+            "player_1":"wagasuner",
+            "player_2":"sh0jan",
+            "winner":"",
+            "link":"",
+            "score": {
+                "player_1": 0,
+                "player_2": 0
+            }
+        }
+    ],
+    "bronze_final": {
+        "match_id":23,
+        "match_time":{
+            "day":4,
+            "utc_time":"18:20"
+        },
+        "player_1":"",
+        "player_2":"",
+        "winner":"",
+        "link":"",
+        "score": {
+            "player_1": 0,
+            "player_2": 0
+        }
+    },
+    "final": {
+        "match_id":24,
+        "match_time":{
+            "day":4,
+            "utc_time":"19:30"
+        },
+        "player_1":"",
+        "player_2":"",
+        "winner":"",
+        "link":"",
+        "score": {
+            "player_1": 0,
+            "player_2": 0
+        }
+    },
     "players": [
         {
             "name":"oxidiot",
@@ -474,67 +536,5 @@
                 "player_2": 3
             }
         }
-    ],
-    "semis" : [
-        {
-            "match_id":21,
-            "match_time":{
-                "day":4,
-                "utc_time":""
-            },
-            "player_1":"oxidiot",
-            "player_2":"Czelco",
-            "winner":"",
-            "link":"",
-            "score": {
-                "player_1": 0,
-                "player_2": 0
-            }
-        },
-        {
-            "match_id":22,
-            "match_time":{
-                "day":4,
-                "utc_time":""
-            },
-            "player_1":"wagasuner",
-            "player_2":"sh0jan",
-            "winner":"",
-            "link":"",
-            "score": {
-                "player_1": 0,
-                "player_2": 0
-            }
-        }
-    ],
-    "bronze_final": {
-        "match_id":23,
-        "match_time":{
-            "day":4,
-            "utc_time":""
-        },
-        "player_1":"",
-        "player_2":"",
-        "winner":"",
-        "link":"",
-        "score": {
-            "player_1": 0,
-            "player_2": 0
-        }
-    },
-    "final": {
-        "match_id":24,
-        "match_time":{
-            "day":4,
-            "utc_time":""
-        },
-        "player_1":"",
-        "player_2":"",
-        "winner":"",
-        "link":"",
-        "score": {
-            "player_1": 0,
-            "player_2": 0
-        }
-    }
+    ]
 }
