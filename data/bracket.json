@@ -452,11 +452,11 @@
             },
             "player_1":"tookannn",
             "player_2":"wagasuner",
-            "winner":"",
+            "winner":"wagasuner",
             "link":"",
             "score": {
-                "player_1": 0,
-                "player_2": 0
+                "player_1": 1,
+                "player_2": 3
             }
         },
         {
@@ -497,7 +497,7 @@
                 "day":4,
                 "utc_time":""
             },
-            "player_1":"",
+            "player_1":"wagasuner",
             "player_2":"",
             "winner":"",
             "link":"",
