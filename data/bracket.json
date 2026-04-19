@@ -8,11 +8,11 @@
             },
             "player_1":"oxidiot",
             "player_2":"Czelco",
-            "winner":"",
+            "winner":"Czelco",
             "link":"",
             "score": {
                 "player_1": 1,
-                "player_2": 2
+                "player_2": 3
             }
         },
         {
@@ -37,7 +37,7 @@
             "day":4,
             "utc_time":"18:20"
         },
-        "player_1":"",
+        "player_1":"oxidiot",
         "player_2":"",
         "winner":"",
         "link":"",
@@ -52,7 +52,7 @@
             "day":4,
             "utc_time":"19:30"
         },
-        "player_1":"",
+        "player_1":"Czelco",
         "player_2":"",
         "winner":"",
         "link":"",
