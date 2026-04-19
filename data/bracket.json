@@ -11,7 +11,7 @@
             "winner":"",
             "link":"",
             "score": {
-                "player_1": 0,
+                "player_1": 1,
                 "player_2": 1
             }
         },
