@@ -39,11 +39,11 @@
         },
         "player_1":"oxidiot",
         "player_2":"wagasuner",
-        "winner":"",
+        "winner":"wagasuner",
         "link":"",
         "score": {
             "player_1": 2,
-            "player_2": 2
+            "player_2": 3
         }
     },
     "final": {
