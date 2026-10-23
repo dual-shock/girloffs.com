@@ -10,6 +10,11 @@ SERVE_FRONTEND = os.environ.get("SERVE_FRONTEND", "1") == "1"
 FRONTEND_DIR = os.environ.get("FRONTEND_DIR", str(Path(__file__).resolve().parents[2] / "frontend"))
 FAKE_NOW = os.environ.get("FAKE_NOW")  # e.g. "2026-04-11T20:45:00Z", for replay testing only
 
+# Admin panel login (Cloudflare Access). Empty values count as unset: compose passes "" for missing .env entries.
+ACCESS_TEAM_DOMAIN = os.environ.get("ACCESS_TEAM_DOMAIN", "").strip() or None  # e.g. "myteam.cloudflareaccess.com"
+ACCESS_AUD = os.environ.get("ACCESS_AUD", "").strip() or None                  # the Access application's AUD tag
+DEV_ADMIN_EMAIL = os.environ.get("DEV_ADMIN_EMAIL", "").strip() or None        # local testing only, ignored when Access is set
+
 
 def now():
     if FAKE_NOW:

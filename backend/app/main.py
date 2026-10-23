@@ -4,10 +4,10 @@ from contextlib import asynccontextmanager, closing
 
 from fastapi import FastAPI
 from fastapi.middleware.gzip import GZipMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import config, db, poller
+from . import admin, config, db, poller
 from .bracket import derive_state
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -46,6 +46,14 @@ def health():
     return {"ok": True, "polling": config.POLL_ENABLED, **poller.status}
 
 
+app.include_router(admin.router)
+
+
 # Local testing: serve the site from the same server. Mounted last so /api and /health win.
+# On the server the site lives on Cloudflare Pages, so / just leads organizers on admin.girloffs.com to the panel.
 if config.SERVE_FRONTEND:
     app.mount("/", StaticFiles(directory=config.FRONTEND_DIR, html=True), name="frontend")
+else:
+    @app.get("/")
+    def root():
+        return RedirectResponse("/admin")

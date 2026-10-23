@@ -29,6 +29,9 @@ services:
     environment:
       - HTTPS_PROXY=http://egress:8888
       - SERVE_FRONTEND=0
+      # Admin panel login, from .env (see README). Without them /admin answers 403 to everyone.
+      - ACCESS_TEAM_DOMAIN=${ACCESS_TEAM_DOMAIN:-}
+      - ACCESS_AUD=${ACCESS_AUD:-}
       # Replay test (Girloffs 2 match on a separate database): uncomment all three,
       # recreate the container, then run: docker exec girloffs python -m app.manage demo-go2
       # - DB_PATH=data/demo.db

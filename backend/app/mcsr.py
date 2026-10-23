@@ -21,6 +21,17 @@ async def versus_matches(client, uuid1, uuid2, season=None):
     return body["data"]
 
 
+async def lookup_user(client, name):
+    """(uuid, current nickname) for a Minecraft name, or None if MCSR doesn't know it."""
+    r = await client.get(f"{BASE_URL}/users/{name}")
+    if r.status_code == 429:
+        raise RateLimited()
+    body = r.json()
+    if body.get("status") != "success":
+        return None
+    return body["data"]["uuid"], body["data"]["nickname"]
+
+
 def select_games(raw, uuid1, uuid2, since):
     """Keep only private-room/event games between exactly these two players, played after `since` (epoch seconds)."""
     games = []

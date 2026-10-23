@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Girloffs admin</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+    <script src="/admin/admin.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Girloffs admin</h1>
+        <div id="status">Loading…</div>
+        <button id="refresh" type="button">Refresh</button>
+    </header>
+    <div id="error" hidden></div>
+    <nav>
+        <a href="#matches">Matches</a>
+        <a href="#players">Players</a>
+        <a href="#audit">Audit log</a>
+        <label><input type="checkbox" id="hide-finished"> hide finished matches</label>
+    </nav>
+    <main>
+        <section id="matches"></section>
+        <h2 id="players-title">Players</h2>
+        <p class="hint">Changing the Minecraft name looks the player up on MCSR and replaces their account (UUID).
+            Games they already played under the old account stop counting.</p>
+        <section id="players"></section>
+        <h2 id="audit-title">Audit log</h2>
+        <section id="audit"></section>
+    </main>
+</body>
+</html>

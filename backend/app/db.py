@@ -36,6 +36,13 @@ CREATE TABLE IF NOT EXISTS games (
     forfeited INTEGER NOT NULL DEFAULT 0,
     excluded INTEGER NOT NULL DEFAULT 0
 );
+CREATE TABLE IF NOT EXISTS audit_log (
+    id INTEGER PRIMARY KEY,
+    at TEXT NOT NULL,
+    email TEXT NOT NULL,
+    action TEXT NOT NULL,
+    details TEXT NOT NULL
+);
 """
 
 

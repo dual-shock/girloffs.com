@@ -1,1 +1,2 @@
 ^api\.mcsrranked\.com$
+^[a-z0-9-]+\.cloudflareaccess\.com$

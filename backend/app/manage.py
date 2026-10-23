@@ -1,4 +1,4 @@
-"""Command line tool for looking at and correcting the bracket until the admin panel exists.
+"""Command line tool for looking at and correcting the bracket (the admin panel does the same in a browser).
 
 Run from the backend folder, e.g.:  python -m app.manage list
 """
@@ -9,15 +9,17 @@ from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import config, db
+from . import config, db, edits
 from .bracket import derive_state
 
 
-def update(conn, sql, params, what):
-    """Run an UPDATE and stop with an error if it didn't change anything (wrong ID or wrong database)."""
-    if conn.execute(sql, params).rowcount == 0:
-        sys.exit(f"ERROR: {what} not found in this database. Nothing was changed.")
-    print(f"ok: {what} updated")
+def apply(fn, conn, target, value):
+    """Make a change through edits.py (same checks and audit log as the admin panel); stop with an error if refused."""
+    try:
+        diff = fn(conn, target, value, "cli")
+    except edits.EditError as e:
+        sys.exit(f"ERROR: {e}. Nothing was changed.")
+    print(f"ok: {diff}" if diff else "ok: it was already set like that, nothing changed")
 
 
 def cmd_list(conn, args):
@@ -36,28 +38,28 @@ def cmd_list(conn, args):
                 print(f"       game {g['mcsr_id']} at {played} UTC, winner uuid {g['winner_uuid']}{flag}")
 
 
+def none_or(value):
+    return None if value == "none" else value
+
+
 def cmd_set_time(conn, args):
-    value = None if args.time == "none" else datetime.fromisoformat(args.time).strftime("%Y-%m-%dT%H:%M:%SZ")
-    update(conn, "UPDATE matches SET scheduled_at = ? WHERE number = ?", (value, args.match), f"match {args.match}")
+    apply(edits.edit_match, conn, args.match, {"scheduled_at": none_or(args.time)})
 
 
 def cmd_set_winner(conn, args):
-    seed = None if args.seed == "none" else int(args.seed)
-    update(conn, "UPDATE matches SET winner_override = ?, forfeit = ? WHERE number = ?",
-           (seed, int(args.forfeit), args.match), f"match {args.match}")
+    apply(edits.edit_match, conn, args.match, {"winner_override": none_or(args.seed), "forfeit": args.forfeit})
 
 
 def cmd_set_score(conn, args):
-    value = None if args.score == "none" else args.score
-    update(conn, "UPDATE matches SET score_override = ? WHERE number = ?", (value, args.match), f"match {args.match}")
+    apply(edits.edit_match, conn, args.match, {"score_override": none_or(args.score)})
 
 
 def cmd_exclude_game(conn, args):
-    update(conn, "UPDATE games SET excluded = 1 WHERE mcsr_id = ?", (args.game,), f"game {args.game}")
+    apply(edits.set_game_excluded, conn, args.game, True)
 
 
 def cmd_include_game(conn, args):
-    update(conn, "UPDATE games SET excluded = 0 WHERE mcsr_id = ?", (args.game,), f"game {args.game}")
+    apply(edits.set_game_excluded, conn, args.game, False)
 
 
 def cmd_demo_go2(conn, args):
