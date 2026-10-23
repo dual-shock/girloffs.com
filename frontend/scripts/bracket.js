@@ -207,7 +207,7 @@ export function updateBracketStatuses(countdownItems) {
         el.classList.remove('bracket-ongoing', 'bracket-finished', 'bracket-upcoming');
         if (item.match.winner) {
             el.classList.add('bracket-finished');
-        } else if (item.target && item.target - now <= 0) {
+        } else if (item.match.status === 'live' || (item.target && item.target - now <= 0)) {
             el.classList.add('bracket-ongoing');
         } else {
             el.classList.add('bracket-upcoming');

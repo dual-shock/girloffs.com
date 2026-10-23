@@ -6,6 +6,11 @@
     font-family: 'Minecraft Regular';
     src: url('../assets/fonts/regular.otf') format('opentype');
 }
+@font-face {
+    font-family: 'Escargoth';
+    src: url('../assets/fonts/escargoth.woff2') format('woff2');
+    font-display: swap;
+}
 
 :root {
     /* ? DEFAULT THEME*/
@@ -29,13 +34,22 @@
         --unselected-opacity: 0.85;
         --unselected-brightness: 0.85;
 
+    /* ? BOXES (bracket, schedule, players): deep berry, see-through so the video glows through */
+        --box-bg: rgba(70, 18, 48, 0.55);
+        --box-hover-bg: rgba(70, 18, 48, 0.7);
+        --box-strong-bg: rgba(56, 12, 38, 0.72);
+        --box-strong-hover-bg: rgba(56, 12, 38, 0.85);
+        --box-faint-bg: rgba(70, 18, 48, 0.32);
+        --box-faint-hover-bg: rgba(70, 18, 48, 0.45);
+        --brand-pink: #f26a8d;
+        --brand-light-pink: #f49cbb;
+
     /* ? BRACKET SCREEN*/
         /* BRACKET LINES */
         --bracket-line-color: #fdfcfda1;
 
         /* SEED NUMBERS */
         --seed-color: rgba(255, 255, 255, 0.5);
-        --player-seed-color: rgba(255, 255, 255, 0.5);
 
         /* TBD TEXT */
         --tbd-color: rgba(255, 255, 255, 0.4);
@@ -47,81 +61,86 @@
         --name-loser-color: #fdfcfda1;
 
         /* NAME CELL BACKGROUNDS */
-        --name-bg: #333;
-        --name-ongoing-bg: #eb9ca9a7;
+        --name-bg: var(--box-bg);
+        --name-ongoing-bg: rgba(244, 156, 187, 0.45);
 
-        --name-winner-bg: #8f4a6de0;
+        --name-winner-bg: rgba(242, 106, 141, 0.5);
 
-        --name-loser-bg: #353232cd;
+        --name-loser-bg: var(--box-faint-bg);
 
         /* SCORE CELL BACKGROUNDS */
-        --score-bg: #444;
-        --score-ongoing-bg: #FCA0B0;
+        --score-bg: var(--box-strong-bg);
+        --score-ongoing-bg: var(--brand-light-pink);
 
-        --winner-score-bg:#ED68AD; 
-        
-        --score-loser-bg: #444444ce;
+        --winner-score-bg: var(--brand-pink);
+
+        --score-loser-bg: var(--box-bg);
+
+        /* ROW DIVIDER */
+        --match-border: rgba(253, 252, 253, 0.12);
 
         /* SCORE DIGIT COLORS */
         --score-winner-color: #FDFCFD;
         --score-loser-color: rgba(255, 255, 255, 0.576);
-  
+
 
         /* HOVER EFFECTS */
-        --name-hover-bg: #444;
-        --score-hover-bg: #555;
+        --match-hover-bg: var(--box-hover-bg);
+        --score-hover-bg: var(--box-strong-hover-bg);
 
-        --winner-hover-bg: #ae698bd3;
-        --winner-score-hover-bg: #ef83bbe8;
-
-        --name-loser-hover-bg: #504b4bcd;
-        --score-loser-hover-bg: rgba(85, 85, 85, 0.6);
+        --name-loser-hover-bg: var(--box-faint-hover-bg);
 
         /* ONGOING HOVER COLORS */
-        --name-ongoing-hover-bg: #ffacbca7;
-        --score-ongoing-hover-bg: #ecaeb8;
+        --name-ongoing-hover-bg: rgba(244, 156, 187, 0.6);
+        --score-ongoing-hover-bg: #f7b3cb;
 
         /* WINNER HOVER COLORS */
-        --winner-hover-bg: #ae698bd3;
-        --winner-score-hover-bg: #ef83bbe8;
+        --winner-hover-bg: rgba(242, 106, 141, 0.65);
+        --winner-score-hover-bg: #f5839f;
 
         /* LOSER HOVER COLORS */
-        --score-loser-hover-bg: #55555599;
+        --score-loser-hover-bg: var(--box-hover-bg);
 
     /* ? SCHEDULE SCREEN */
         /* DEFAULT (set time/players, not ongoing or next) */
-        --schedule-time-bg: var(--white);
-        --schedule-time-color: var(--hot-pink);
-        --schedule-bar-bg: rgba(51, 51, 51, 0.85);
+        --schedule-time-bg: var(--box-strong-bg);
+        --schedule-time-color: var(--white);
+        --schedule-bar-bg: var(--box-bg);
         --schedule-bar-color: var(--white);
-        --schedule-bar-hover-bg: rgba(71, 71, 71, 0.85);
+        --schedule-bar-hover-bg: var(--box-hover-bg);
 
         /* TBD (no players and no time set) */
         --schedule-tbd-time-bg: rgba(253, 252, 253, 0.35);
         --schedule-tbd-time-color: rgba(237, 104, 173, 0.5);
-        --schedule-tbd-bar-bg: rgba(51, 51, 51, 0.4);
+        --schedule-tbd-bar-bg: var(--box-faint-bg);
         --schedule-tbd-bar-color: rgba(255, 255, 255, 0.4);
-        --schedule-tbd-bar-hover-bg: rgba(71, 71, 71, 0.5);
+        --schedule-tbd-bar-hover-bg: var(--box-faint-hover-bg);
 
         /* ONGOING */
         --schedule-ongoing-time-bg: var(--white);
         --schedule-ongoing-time-color: var(--hot-pink);
-        --schedule-ongoing-bar-bg: #eb9ca9a7;
+        --schedule-ongoing-bar-bg: rgba(244, 156, 187, 0.45);
         --schedule-ongoing-bar-color: #FDFCFD;
-        --schedule-ongoing-bar-hover-bg: #ffacbca7;
+        --schedule-ongoing-bar-hover-bg: rgba(244, 156, 187, 0.6);
         --schedule-ongoing-status-color: #FDFCFD;
 
         /* NEXT MATCH */
         --schedule-next-time-bg: var(--white);
         --schedule-next-time-color: var(--hot-pink);
-        --schedule-next-bar-bg: rgba(113, 69, 99, 0.85);
+        --schedule-next-bar-bg: rgba(242, 106, 141, 0.5);
         --schedule-next-bar-color: var(--white);
-        --schedule-next-bar-hover-bg: rgba(100, 65, 88, 0.85);
-        --schedule-next-status-color: var(--hot-pink);
+        --schedule-next-bar-hover-bg: rgba(242, 106, 141, 0.62);
+        --schedule-next-status-color: var(--white);
+
+        /* FINISHED */
+        --schedule-finished-bar-bg: var(--box-faint-bg);
+        --schedule-finished-bar-color: rgba(253, 252, 253, 0.55);
+        --schedule-finished-bar-hover-bg: var(--box-faint-hover-bg);
 
     /* ? PLAYERS SCREEN */
-        --player-bg: #333;
-        --player-hover-bg: #3d3d3d;
+        /* Minecraft-tooltip dark: berry blended into the pink lineup */
+        --player-bg: rgba(16, 0, 16, 0.82);
+        --player-hover-bg: rgba(16, 0, 16, 0.9);
 
     /* ? HEADER */
         /* NAV LINKS */

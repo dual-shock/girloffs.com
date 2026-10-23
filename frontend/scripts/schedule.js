@@ -31,8 +31,7 @@ export function initTzSelector() {
     TZ_LIST.forEach(function(tz) {
         var opt = document.createElement('option');
         opt.value = tz;
-        var abbr = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'short' }).formatToParts(new Date()).find(function(p) { return p.type === 'timeZoneName'; });
-        opt.textContent = abbr ? abbr.value : tz.replace(/_/g, ' ');
+        opt.textContent = tzName(new Date(), tz);
         if (tz === localTz) opt.selected = true;
         select.appendChild(opt);
     });
@@ -42,6 +41,8 @@ export function initTzSelector() {
         resizeTzSelect(select);
     });
     resizeTzSelect(select);
+    // measure again once the header/footer font has loaded
+    document.fonts.ready.then(function() { resizeTzSelect(select); });
 }
 
 function resizeTzSelect(select) {
@@ -60,10 +61,19 @@ function formatTimeInTz(utcDate, tz) {
     return utcDate.toLocaleTimeString('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false });
 }
 
+// Short zone name at that moment, e.g. Europe/Oslo -> "GMT+2" on Saturday, "GMT+1" on Sunday (DST ends Oct 25)
+function tzName(date, tz) {
+    var part = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'short' }).formatToParts(date).find(function(p) { return p.type === 'timeZoneName'; });
+    return part ? part.value : tz.replace(/_/g, ' ');
+}
+
 function updateAllDisplayedTimes() {
     document.querySelectorAll('.schedule-time-box[data-utc]').forEach(function(el) {
         var d = new Date(el.dataset.utc);
         el.textContent = formatTimeInTz(d, selectedTz);
+    });
+    document.querySelectorAll('.day-tz').forEach(function(el) {
+        el.textContent = ' (' + tzName(new Date(el.dataset.utc), selectedTz) + ')';
     });
 }
 
@@ -75,6 +85,12 @@ function formatDay(day) {
 
 function matchDate(match) {
     return match.scheduled_at ? new Date(match.scheduled_at) : null;
+}
+
+var ROUND_LABELS = { 1: 'R1', 2: 'R2', 3: 'QF', 4: 'SF', 5: 'Final' };
+
+function roundLabel(match) {
+    return match.third_place ? '3rd' : ROUND_LABELS[match.round] || '';
 }
 
 // Builds the schedule tab and returns the countdown items the 1-second ticker updates.
@@ -101,6 +117,14 @@ export function renderSchedule(state, playerMap) {
         var title = document.createElement('div');
         title.className = 'day-title';
         title.textContent = day === 'TBD' ? 'TBD' : formatDay(day);
+        var first = matchDate(matches[0]);
+        if (first) {
+            var zone = document.createElement('span');
+            zone.className = 'day-tz';
+            zone.dataset.utc = first.toISOString();
+            zone.textContent = ' (' + tzName(first, selectedTz) + ')';
+            title.appendChild(zone);
+        }
         col.appendChild(title);
 
         var matchesWrap = document.createElement('div');
@@ -118,7 +142,7 @@ export function renderSchedule(state, playerMap) {
             if (!p1 && !p2 && !match.scheduled_at) el.classList.add('schedule-match-tbd');
 
             var timeBox = document.createElement('div');
-            timeBox.className = 'schedule-time-box pixel-box';
+            timeBox.className = 'schedule-time-box';
             var start = matchDate(match);
             if (start) {
                 timeBox.dataset.utc = start.toISOString();
@@ -129,6 +153,15 @@ export function renderSchedule(state, playerMap) {
 
             var bar = document.createElement('div');
             bar.className = 'schedule-bar';
+
+            var roundEl = document.createElement('span');
+            roundEl.className = 'schedule-round';
+            roundEl.textContent = roundLabel(match);
+
+            var p1El = createName(match.players[0], p1, match.winner);
+            p1El.classList.add('schedule-p1');
+            var p2El = createName(match.players[1], p2, match.winner);
+            p2El.classList.add('schedule-p2');
 
             var scoreEl = document.createElement('span');
             scoreEl.className = 'schedule-score';
@@ -141,10 +174,11 @@ export function renderSchedule(state, playerMap) {
             vsEl.className = 'schedule-vs';
             vsEl.textContent = 'vs';
 
-            bar.appendChild(createName(match.players[0], p1, match.winner));
-            bar.appendChild(vsEl);
-            bar.appendChild(createName(match.players[1], p2, match.winner));
+            bar.appendChild(roundEl);
+            bar.appendChild(p1El);
             bar.appendChild(scoreEl);
+            bar.appendChild(vsEl);
+            bar.appendChild(p2El);
             bar.appendChild(countdown);
 
             el.appendChild(timeBox);
@@ -201,7 +235,7 @@ export function updateCountdowns(items) {
         if (item.match.winner) {
             matchEl.classList.add('match-finished');
             item.el.textContent = '';
-        } else if (diff <= 0) {
+        } else if (item.match.status === 'live' || diff <= 0) {
             matchEl.classList.add('match-ongoing');
             item.el.textContent = 'Live!';
         } else {
@@ -225,13 +259,15 @@ export function updateCountdowns(items) {
         var m = Math.floor((diff % 3600000) / 60000);
         var s = Math.floor((diff % 60000) / 1000);
         var d = Math.floor(diff / 86400000);
+        var text;
         if (d >= 1) {
-            headerEl.textContent = d + 'd ' + (h % 24) + 'h ' + m + 'm ' + s + 's';
+            text = d + 'd ' + (h % 24) + 'h ' + m + 'm ' + s + 's';
         } else if (h >= 1) {
-            headerEl.textContent = h + 'h ' + m + 'm ' + s + 's';
+            text = h + 'h ' + m + 'm ' + s + 's';
         } else {
-            headerEl.textContent = m + 'm ' + s + 's';
+            text = m + 'm ' + s + 's';
         }
+        headerEl.innerHTML = text.replace(/\d/g, '<span class="digit">$&</span>');
     } else {
         headerEl.textContent = '--';
     }

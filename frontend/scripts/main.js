@@ -2,6 +2,7 @@ import { activateTab } from './nav.js';
 import { renderBracket, drawBracketLines, updateBracketStatuses } from './bracket.js';
 import { initTzSelector, renderSchedule, updateCountdowns, scrollToNearest } from './schedule.js';
 import { renderPlayers } from './players.js';
+import { initCredits } from './credits.js';
 
 // On girloffs.com and Cloudflare Pages previews the API lives on its own subdomain; locally the same server serves both.
 const API_BASE = /(^|\.)girloffs\.com$|\.pages\.dev$/.test(location.hostname) ? 'https://api.girloffs.com' : '';
@@ -112,7 +113,7 @@ function logError(err) {
     console.error('Could not load bracket state:', err);
 }
 
-document.querySelectorAll('nav a').forEach(link => {
+document.querySelectorAll('nav a, .credits-link').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
         activateTab(link.getAttribute('href'));
@@ -125,11 +126,6 @@ if (window.location.hash) {
 }
 
 document.addEventListener('click', function(e) {
-    if (!e.target.closest('.player-item')) {
-        document.querySelectorAll('.player-item').forEach(function(el) {
-            el.classList.remove('player-highlight');
-        });
-    }
     if (!e.target.closest('.schedule-match') && !e.target.closest('.match')) {
         document.querySelectorAll('.schedule-match').forEach(function(el) {
             el.classList.remove('schedule-highlight');
@@ -138,6 +134,7 @@ document.addEventListener('click', function(e) {
 });
 
 initTzSelector();
+initCredits();
 
 checkIfLive('mollyyxy').then(function(isLive) {
     streamIsLive = isLive;

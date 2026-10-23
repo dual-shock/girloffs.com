@@ -9,7 +9,8 @@ html, body {
     padding:0;
 }
 html {
-    background-color: var(--hot-pink);
+    background: var(--hot-pink) url('../assets/branding/gradient-loop-poster.webp') center/cover no-repeat fixed;
+    background-image: image-set(url('../assets/branding/gradient-loop-poster.avif') type('image/avif'), url('../assets/branding/gradient-loop-poster.webp') type('image/webp'));
 }
 body {
     height: 100vh;
@@ -17,9 +18,48 @@ body {
     display: flex;
     flex-direction: column;
     color: var(--white);
-    background: url('../assets/branding/gradient3.png') center/cover no-repeat fixed;
-    background-color: var(--hot-pink);
     font-family: "Minecraft Regular";
+}
+
+.bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* the lineup (brand recolour baked in by tools/tint_lineup.py) sits under the gradient and is never hidden itself,
+   because phones pause hidden muted videos; on Players the gradient is hidden once the lineup plays */
+body.lineup-bg .bg-gradient {
+    visibility: hidden;
+}
+
+/* on Players the lineup behind the header and footer is blurred, strongest at the page edge and fading out towards
+   the content; it's a separate layer under the text so the text itself stays sharp. The slight hue shift, saturation
+   and brightness turn the darkened top-left from mustard yellow into a proper orange */
+body.lineup-bg header::before,
+body.lineup-bg footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    -webkit-backdrop-filter: blur(12px) hue-rotate(-5deg) saturate(1.4) brightness(1.1);
+    backdrop-filter: blur(12px) hue-rotate(-5deg) saturate(1.4) brightness(1.1);
+    -webkit-mask-image: linear-gradient(black 25%, transparent);
+    mask-image: linear-gradient(black 25%, transparent);
+}
+
+body.lineup-bg footer::before {
+    -webkit-mask-image: linear-gradient(transparent, black 75%);
+    mask-image: linear-gradient(transparent, black 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bg-video {
+        display: none;
+    }
 }
 
 .mc-shadow {
@@ -69,13 +109,23 @@ body {
     filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.45));
 }
 
+header, footer {
+    font-family: "Escargoth", serif;
+    letter-spacing: 0.04em;
+    text-shadow: 0 0.08em 0 rgba(120, 10, 60, 0.35);
+}
+
 header {
     height: 15vh;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     border: 0px solid red;
-    font-family: "Minecraft Bold";
+    position: relative;
+}
+
+header picture {
+    display: contents;
 }
 
 .logo {
@@ -109,7 +159,8 @@ nav a:hover {
 nav a.active {
     color: var(--nav-active-color);
     text-decoration: underline;
-    text-underline-offset: 8px;
+    text-decoration-thickness: 0.07em;
+    text-underline-offset: 0.2em;
 }
 
 .header-actions {
@@ -185,25 +236,30 @@ nav a.active {
 }
 
 .next-match-label {
-    font-family: "Minecraft Bold";
-
     font-size: 0.85rem;
-    font-weight: 900;
+    letter-spacing: 0.12em;
     color: var(--white);
     padding-bottom: 2px;
 }
 
 .next-match-timer {
-    font-family: "Minecraft Bold";
     font-size: 1.6rem;
+    line-height: 1;
     color: var(--hot-pink);
     text-shadow:
         0 0.05em 0 #F4006E,
         0 0.1em 0 #F4006E;
-    padding: 1px 6px;
+    padding: 0.14em 0.3em 0.04em;
     text-align: center;
     white-space: nowrap;
     display: inline-block;
+}
+
+/* Escargoth has proportional digits; fixed slots stop the countdown from wobbling every second */
+.next-match-timer .digit {
+    display: inline-block;
+    width: 0.52em;
+    text-align: center;
 }
 
 main {
@@ -214,40 +270,6 @@ main {
     box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-}
-
-main::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-                url('../assets/branding/gradient4-720p.png') center/cover no-repeat #7ec8d4;
-    box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 0;
-}
-
-main::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-                url('../assets/branding/gradient2-720p.png') center/cover no-repeat #a830d0;
-    box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 0;
-}
-
-main.schedule-bg::before {
-    opacity: 1;
-}
-
-main.players-bg::after {
-    opacity: 1;
 }
 
 .tab-content {
@@ -401,19 +423,6 @@ main.players-bg::after {
     flex-shrink: 0;
 }
 
-.player-item-seed {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 2ch;
-    text-align: right;
-    margin-right: 8px;
-    font-size: 1.2rem;
-    color: var(--player-seed-color);
-    background: none;
-    flex-shrink: 0;
-}
-
 .player-score {
     width: 28px;
     text-align: center;
@@ -523,8 +532,9 @@ main.players-bg::after {
     pointer-events: none;
 }
 
-.player-item.player-highlight .player-item-content {
+.player-featured .player-item-content {
     outline: 2px solid var(--selection-border-color);
+    cursor: default;
 }
 
 .schedule-match.schedule-highlight {
@@ -562,15 +572,6 @@ main.players-bg::after {
 
 .player-item:hover .player-item-content {
     background: var(--player-hover-bg);
-}
-
-.player-item {
-    transition: opacity 0.3s ease, filter 0.3s ease;
-}
-
-.players-container:has(.player-highlight) .player-item:not(.player-highlight) {
-    opacity: var(--unselected-opacity);
-    filter: brightness(var(--unselected-brightness));
 }
 
 .schedule-container:has(.schedule-highlight) .schedule-match:not(.schedule-highlight) {
@@ -633,15 +634,16 @@ main.players-bg::after {
     z-index: 1;
 }
 
+/* round | player 1 (right) | score or vs | player 2 (left) | status: the scores line up like a fixtures table */
 .schedule-bar {
     flex: 1;
-    display: flex;
+    display: grid;
+    grid-template-columns: 2.6em minmax(0, 1fr) auto minmax(0, 1fr) 3em;
     align-items: center;
-    gap: 0.55rem;
-    padding: 8px 14px;
+    column-gap: 0.6em;
+    padding: 0.55em 0.8em;
     background: var(--schedule-bar-bg);
     color: var(--schedule-bar-color);
-    margin-left: -6px;
     min-width: 0;
     transition: background 0.3s ease;
 }
@@ -653,15 +655,68 @@ main.players-bg::after {
     border-left: 2px solid var(--selection-border-color);
 }
 
-.schedule-score {
-    font-family: "Minecraft Bold";
-    opacity: 0.7;
-    flex-shrink: 0;
+.day-matches {
+    align-items: center;
 }
 
+.schedule-match {
+    width: 100%;
+    max-width: 38em;
+}
+
+.schedule-round {
+    grid-column: 1;
+    font-size: 0.75em;
+    opacity: 0.6;
+}
+
+.schedule-p1 {
+    grid-column: 2;
+    text-align: right;
+}
+
+.schedule-p2 {
+    grid-column: 4;
+}
+
+.schedule-p1,
+.schedule-p2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.schedule-score,
 .schedule-vs {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.schedule-score {
+    font-family: "Minecraft Bold";
+}
+
+/* "vs" only before any games are played; after that the score takes its place */
+.schedule-vs {
+    display: none;
     opacity: 0.5;
-    flex-shrink: 0;
+}
+
+.schedule-match.match-upcoming .schedule-vs {
+    display: inline;
+}
+
+.schedule-match .match-countdown {
+    grid-column: 5;
+    text-align: right;
+}
+
+/* phones: no room for the aligned columns, so the row just flows */
+@media (max-width: 700px) {
+    .schedule-bar {
+        display: flex;
+        gap: 0.5em;
+    }
 }
 
 .schedule-match .match-countdown {
@@ -710,6 +765,25 @@ main.players-bg::after {
     color: var(--schedule-next-status-color);
 }
 
+/* played: faded so the matches still to come stand out; the winner's name stays bright */
+.schedule-match.match-finished .schedule-time-box {
+    opacity: 0.55;
+}
+
+.schedule-match.match-finished .schedule-bar {
+    background: var(--schedule-finished-bar-bg);
+    color: var(--schedule-finished-bar-color);
+}
+
+.schedule-match.match-finished:hover .schedule-bar {
+    background: var(--schedule-finished-bar-hover-bg);
+}
+
+/* no games yet: a 0 - 0 would read like a result */
+.schedule-match.match-upcoming .schedule-score {
+    display: none;
+}
+
 .schedule-match .matchup {
     flex: 1;
     overflow: hidden;
@@ -755,14 +829,35 @@ main.players-bg::after {
     fill: var(--white);
 }
 
+/* 4 x 7: the featured player's card and render fill the left column, the other 21 fill the rest */
 .players-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     grid-auto-rows: 1fr;
     gap: 0.5rem;
     padding: 1rem;
     height: 100%;
     overflow: hidden;
+}
+
+.player-featured {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.player-render {
+    grid-column: 1;
+    grid-row: 2 / -1;
+    min-height: 0;
+}
+
+.player-render img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0.5rem 1rem rgba(0, 0, 0, 0.45));
 }
 
 .player-item {
@@ -771,23 +866,42 @@ main.players-bg::after {
     min-height: 48px;
 }
 
+/* everything inside a card is sized in em from this, so text, icons and seed scale together */
 .player-item-content {
     flex: 1;
     display: flex;
     align-items: stretch;
     background: var(--player-bg);
+    font-size: 0.9rem;
     min-width: 0;
     min-height:0;
     overflow:hidden;
     cursor: pointer;
+}
 
+.player-head {
+    position: relative;
+    height: 100%;
+    aspect-ratio: 1;
+    flex-shrink: 0;
 }
 
 .player-avatar {
+    display: block;
+    width: 100%;
     height: 100%;
-    aspect-ratio: 1;
     object-fit: cover;
-    flex-shrink: 0;
+}
+
+/* drawn like a Minecraft item-stack count: white, hard grey shadow, bottom-right */
+.player-item-seed {
+    position: absolute;
+    right: 0.1em;
+    bottom: 0;
+    font-size: 1.25em;
+    line-height: 1;
+    color: var(--white);
+    text-shadow: 0.1em 0.1em 0 #3f3f3f;
 }
 
 .player-info {
@@ -795,65 +909,187 @@ main.players-bg::after {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2px 8px;
+    gap: 0.25em;
+    padding: 0 0.8em;
+    min-width: 0;
+}
+
+.player-info-top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
     min-width: 0;
 }
 
 .player-info-name {
-    font-size: 0.8rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.player-info-bottom {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-    opacity: 0.7;
-}
-
-.player-pref-name {
+    font-family: "Minecraft Bold";
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .player-pronouns {
+    flex-shrink: 0;
+    font-size: 0.8em;
+    opacity: 0.6;
     white-space: nowrap;
-    flex-shrink: 0;
 }
 
-.player-twitch-link {
+.player-mc-name {
+    font-size: 0.85em;
+    opacity: 0.6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-links {
     display: flex;
     align-items: center;
+    gap: 0.4em;
     flex-shrink: 0;
-    height: 100%;
+    padding: 0 0.7em;
 }
 
-.player-twitch-link svg {
-    height: 100%;
-    max-height: 80px;
-    aspect-ratio: 1;
-    display: block;
-    padding: 19%;
-    padding-right:0%;
-    padding-bottom:22%;
-}
-
+.player-twitch-link,
 .player-ranked-link {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    height: 100%;
-    padding-right:1%;
+    display: block;
 }
 
+.player-twitch-link svg,
 .player-ranked-link img {
-    height: 100%;
-    max-height: 80px;
-    aspect-ratio: 1;
+    display: block;
+    width: 1.6em;
+    height: 1.6em;
     object-fit: contain;
+}
+
+/* the ranked image is ~30% transparent padding; scaling it matches the Twitch icon's visible size */
+.player-ranked-link img {
+    transform: scale(1.35);
+}
+
+.credits-container {
+    height: 100%;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-content: start;
+    padding: clamp(1rem, 1.5vw, 2.5rem);
+    padding-right: 0;
+    /* --logo-center comes from credits.js; 2.5em is half the width of "credits/" */
+    padding-left: max(1rem, calc(var(--logo-center, 0px) - 2.5em));
+    font-size: clamp(0.85rem, 1.5vh, 1.4rem);
+    line-height: 1.2;
+    text-shadow: 0 0.1em 0 rgba(0, 0, 0, 0.35);
+}
+
+.credits-root,
+.credits-tree {
+    grid-column: 1;
+}
+
+/* braille-only subset of Noto Sans Symbols 2: every braille character is the same width
+   (Windows' own braille font has a narrower blank, which skews the art) */
+@font-face {
+    font-family: "Braille";
+    src: url('../assets/fonts/braille.woff2') format('woff2');
+    unicode-range: U+2800-28FF;
+    font-display: block;
+}
+
+/* spans the whole list, centered in the space right of the tree */
+.credits-art {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    container-type: size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 80% of the list's height: cqh = 1% of .credits-art, 31 = lines in the art */
+.credits-art pre {
+    font-family: Roboto, sans-serif;
+    font-size: calc(85cqh / 31);
+    line-height: 1;
+    color: rgba(253, 252, 253, 0.748);
+    text-shadow: none;
+}
+
+/* phones: no room next to the list, so the art creeps in from beyond the right edge */
+@media (max-width: 700px) {
+    .credits-art {
+        justify-content: flex-start;
+    }
+}
+
+.credits-root,
+.credits-tree > li {
+    font-family: "Minecraft Bold";
+}
+
+.credits-tree ul {
+    font-family: "Minecraft Regular";
+}
+
+.credits-tree,
+.credits-tree ul {
+    list-style: none;
+}
+
+.credits-tree > li:not(:last-child) {
+    padding-bottom: 0.6em;
+}
+
+/* tree lines are drawn with borders: the Minecraft font has no box-drawing characters */
+.credits-tree li {
+    position: relative;
+    padding-left: 1.75em;
+}
+
+.credits-tree li::before,
+.credits-tree li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.credits-tree li::before {
+    left: 0.1em;
+    width: 1.15em;
+    height: 0.7em;
+    border-bottom: 0.1em solid;
+}
+
+.credits-tree li:last-child::before {
+    left: 0;
+    width: 1.25em;
+    border-left: 0.1em solid;
+}
+
+.credits-tree li:not(:last-child)::after {
+    bottom: 0;
+    border-left: 0.1em solid;
+}
+
+.credits-tree a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.credits-tree a:hover {
+    color: var(--footer-link-hover-color);
+    text-decoration: underline;
+}
+
+.credit-site {
+    font-size: 0.75em;
+    opacity: 0.6;
 }
 
 footer {
@@ -897,8 +1133,8 @@ footer a:hover {
 }
 
 .tz-select {
-    font-family: "Minecraft Regular";
-    font-size: 0.7rem;
+    font-size: inherit;
+    text-shadow: inherit;
     background: none;
     border: none;
     color: var(--white);
@@ -975,20 +1211,14 @@ footer a:hover {
         min-width: 0;
     }
 
-    .player-info {
-        padding: clamp(2px, 0.4vw, 8px) clamp(8px, 0.8vw, 16px);
-    }
-
-    .player-info-name {
+    .player-item-content {
         font-size: clamp(0.8rem, 1.05vw, 1.3rem);
     }
 
-    .player-info-bottom {
-        font-size: clamp(0.7rem, 0.9vw, 1.15rem);
-    }
-
-    .player-item-seed {
-        font-size: clamp(1.2rem, 1.5vw, 2rem);
+    /* 4 columns leave little width per card, so the two icons stack to give the names room */
+    .player-links {
+        flex-direction: column;
+        justify-content: center;
     }
 
     .next-match-label {
@@ -1139,14 +1369,15 @@ footer a:hover {
     }
     .players-container {
         grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: none;
         overflow-y: auto;
         gap: 0.75rem;
     }
+    .player-render {
+        grid-row: 2 / span 5;
+    }
     .player-item {
         min-width: 0;
-    }
-    .player-item-seed {
-        font-size: clamp(1.2rem, 3vw, 2rem);
     }
     .schedule-match {
         font-size: 1.6rem;
@@ -1205,6 +1436,10 @@ footer a:hover {
     }
     .players-container {
         grid-template-columns: 1fr;
+        grid-template-rows: auto 30vh;
+    }
+    .player-render {
+        grid-row: 2;
     }
     .schedule-match {
         font-size: 0.95rem;

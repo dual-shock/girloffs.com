@@ -26,14 +26,16 @@ Only things that matter for the design: no task logs, no code details that the C
 - **Use the optimized copies** in `optimized/` (sizes and quality in `optimized/README.md`, everything visible
   in `optimized/preview.html`). Move only what's used into `frontend/assets/`.
   - Images: `<picture>` with the AVIF source first and WebP as the `<img>` (or `image-set()` in CSS).
-  - Video: `<video autoplay muted loop playsinline poster=...>` with the AV1 source first,
+  - Video: `<video autoplay muted loop playsinline>` with the AV1 source first,
     `type='video/mp4; codecs="av01.0.08M.10"'` (exact string per file in preview.html), then H.264.
-    Poster only under `prefers-reduced-motion`.
+    The page background video uses its poster as the `html` background instead of a `poster=` attribute (it's
+    already loaded by the loading screen, covers the gap until the video plays, and is all that shows under
+    `prefers-reduced-motion`, where the video is hidden).
   - Fonts: WOFF2 with `font-display: swap`.
 
 ## Pages
-- Existing: bracket, schedule, players (tabs in `index.html`).
-- Planned: credits, a page per player, results.
+- Existing: bracket, schedule, players (tabs in `index.html`), credits (`#credits` tab, linked from the footer).
+- Planned: a page per player, results.
 
 ## Known gaps in the Girloffs 2 frontend (fix while redesigning)
 - "Live" is decided by the browser clock only (`updateBracketStatuses`), so a match that starts early shows as
@@ -42,4 +44,61 @@ Only things that matter for the design: no task logs, no code details that the C
 - A forfeit win shows 0-0 with the winner highlighted and no marker. `match.forfeit` is in the API.
 
 ## Decisions
-(none yet)
+- Credits page: keep it simple and looking like the rest of the site. Left-aligned file tree, no colons:
+  `credits/` → roles with a trailing `/` (bold) → names (regular, linked to their profile) with a dim `(site)`;
+  tree lines dim. A small gap between role sections so they read as separate lists. `credits/` sits centered
+  under the header logo at every width. The Minecraft font has no box-drawing characters or backtick, so tree
+  lines are drawn in CSS, not typed.
+- Credits art: the owner's braille art (heart/swirl vine, bottom of `notes.md`) fills the empty space right of the
+  tree. It stays real, selectable braille text with visible individual dots (the owner wants that texture, not
+  solid pixel art) and is soft, 50% white, much quieter than the tree text. 80% of the list's height, centered
+  between the tree and the right screen edge. Phones (≤700px): it creeps in from beyond the right edge instead.
+  Font: a braille-only subset of Noto Sans Symbols 2 (`assets/fonts/braille.woff2`, `font-display: block`):
+  Windows' own braille font has a narrower blank character, which skews the art.
+- Backgrounds cover the whole page, header and footer included. Bracket, Schedule and every other tab: the plain
+  gradient loop video. Players: the lineup animation behind the whole page. `main` keeps the Girloffs 2 look on top
+  (dark tint + inset shadow, same strength on every tab).
+- Players header/footer: the lineup behind them is blurred as a gradient, strongest at the page edge (full blur
+  for the outer quarter) and fading to sharp towards the content. The blur also nudges hue/saturation/brightness
+  so the top-left reads as a pretty orange, not mustard yellow. Tried and dropped: a uniform frosted blur over
+  the whole header/footer; the lineup only in the content area (with or without a slow pan).
+- No transitions on tab switches or player swaps: the owner wants the site snappy, not animated.
+- Players background must stay calm (the raw lineup looked "messy, jumbled, illegible"): the lineup is greyscaled
+  and recoloured with the brand gradient, orange top-left to pink bottom-right (pink top-left was tried; the
+  owner preferred orange), and baked slightly darker (brightness 0.88). Heavier darkening (brightness 0.8 plus a
+  darker middle) was too dark. The recolour is baked into the video file (`tools/tint_lineup.py`), not CSS.
+- The timezone picker in the footer is the same size as its "time shown in" label.
+- Players layout: one featured player (seed 1 by default) gets the left column: their normal card (outlined) with
+  their full-body render below it. The other 21 fill 3 columns x 7 rows in seed order. Clicking any card (or a
+  player in the bracket/schedule) features them; the previous one drops back to their seed spot. Tablet: same idea
+  in 2 columns (render spans 5 rows under the card). Phone: card, then render, then the list. On desktop the Twitch
+  and Ranked icons stack vertically so names fit in the narrower cards. Renders live in `assets/players/<seed>`.
+- Header and footer text: Escargoth (all caps, slight letter-spacing, hard dark-pink drop shadow). The rest of the
+  site stays in the Minecraft font for now. The countdown uses fixed-width digit slots (Escargoth's digits differ
+  in width and would wobble every second).
+- Header logo and loading-screen logo: the Girloffs 3 logo with the cream border. The owner tried the no-border
+  version on 2026-10-23 and went back to the bordered one.
+- The Girloffs 2 solid grey boxes (`#333`/`#444` name, score, player and schedule-bar backgrounds) don't work with
+  the new look anywhere: too solid, "plastered on", cluttered. Replace the grey with something that fits the
+  pink/orange video. Bracket: only the grey needs to change, the layout is fine.
+  Replacement (theme.css `--box-*`): a deep berry `rgb(70, 18, 48)`, see-through so the video glows through, no
+  blur. Normal 55%, denser 72% (score cells), faint 32% (losers, TBD). Winners/live use the Girloffs 3 brand pinks
+  `#f26a8d` / `#f49cbb`, not the old hot pink. The owner really likes this colourway on the Bracket: keep it.
+  This session (credits) owns Bracket/Schedule/Players styling from 2026-10-23 13:30.
+- Live = the API's `match.status === 'live'` (games in progress), with the clock only as a fallback (Bracket and
+  Schedule both).
+- Schedule states must be readable at a glance, quietest to loudest: played (faded row and time chip, only the
+  winner's name stays bright) < upcoming (berry, no "0 - 0" until there are games) < Next (bright brand pink,
+  never darker: it must attract attention) < Live (light pink, brightest).
+- Players cards: the berry blended into the pink lineup and was illegible; more transparency made it worse (the
+  lineup shows through the text). Now Minecraft-tooltip dark `rgba(16, 0, 16, 0.82)`, which separates cleanly from
+  the pink background. No borders: not around the card (a pink inner border was tried) and not around the heads
+  (a dark frame was tried); the owner prefers none.
+- Players cards (owner, 2026-10-23): no structure, uneven; pronouns look slapped in; the spacing between cards is
+  awkward. Needs a clear, even internal layout. Now every card: head | bold display name + dim pronouns right
+  after it / dim Minecraft name below | Twitch + Ranked icons (same visible size). Display name is the main name
+  because Bracket and Schedule show display names. The seed sits on the head like a Minecraft item-stack count
+  (white, hard grey shadow, bottom-right) instead of floating in the gap between columns, so all gaps are equal.
+  Everything in a card is sized in em from one font size, so it scales together.
+- Schedule (owner, 2026-10-23): on two-column desktop the match bars are far too long with nothing in them; colours,
+  font and overall look feel out of place with the current styling.

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="image/png" sizes="120x120" rel="icon" href="assets/branding/GirloffsLogo.png">
     <link rel="preconnect" href="https://api.girloffs.com" crossorigin>
-    <link rel="preload" href="assets/branding/gradient3.png" as="image">
+    <link rel="preload" href="assets/branding/gradient-loop-poster.avif" as="image" type="image/avif">
+    <link rel="preload" href="assets/fonts/escargoth.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles/main.css">
     <title>Girloffs</title>
     <style>
@@ -16,7 +17,8 @@
             position: fixed;
             inset: 0;
             z-index: 99999;
-            background: url('assets/branding/gradient3.png') center/cover no-repeat fixed, var(--hot-pink);
+            background: var(--hot-pink) url('assets/branding/gradient-loop-poster.webp') center/cover no-repeat fixed;
+            background-image: image-set(url('assets/branding/gradient-loop-poster.avif') type('image/avif'), url('assets/branding/gradient-loop-poster.webp') type('image/webp'));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -40,21 +42,32 @@
     </style>
 </head>
 <body>
-        <div id="loading-overlay"><img id="loading-logo" src="assets/branding/Girloffs2Logo.png" alt="Girloffs loading..."></div>
+        <div id="loading-overlay"><picture><source srcset="assets/branding/girloffs-logo.avif" type="image/avif"><img id="loading-logo" src="assets/branding/girloffs-logo.webp" alt="Girloffs loading..."></picture></div>
+    <video class="bg-video bg-lineup" muted loop playsinline preload="none" aria-hidden="true">
+        <source src="assets/branding/lineup-tinted-1080.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'>
+        <source src="assets/branding/lineup-tinted-720.h264.mp4" type="video/mp4">
+    </video>
+    <video class="bg-video bg-gradient" autoplay muted loop playsinline aria-hidden="true">
+        <source src="assets/branding/gradient-loop-1080.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"'>
+        <source src="assets/branding/gradient-loop-720.h264.mp4" type="video/mp4">
+    </video>
     <img alt="" class="ranked-icon-src" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAOHSURBVHhe7dxBahRBAIbRRLyAB3GRhdfxGIInEDyG13GRhQfxAoIm0EuZApuypvp7D0J6M9M9m4+B+pMHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADY0OPx+279fnFcwnYeXxyXd+nN8RsIEgAIEwAIEwAIEwAIEwAIEwAI234H8O7903EF/9/PH8/H1b9ZvRPwDQDCBADCBADCBADCBADCBADCBADCLr8D+PTt7XG1p68ffx1Xf7f75xtZ/flH9x8Z7QTsAIBlBADCBADCBADCBADCBADCBADC8juAz0/fj6s1vjx/OK7mOPv5zj7f6P6rP//o/nYAwGUJAIQJAIQJAIQJAIQJAIQJAITZAWx+Tj37+Wc/38jq57cDAC5LACBMACBMACBMACBMACBMACBMAFjq9Rz+1s/rOf6tH84RAAgTAAgTAAgTAAgTAAgTAAgTAAjz/wAWnyW/nnWfMXr+1e+/++v9PwDgsgQAwgQAwgQAwgQAwgQAwgQAwuwAJp+jj8w+555t9jn8yNnPbwcAZAkAhAkAhAkAhAkAhAkAhAkAhNkBXHwHMPucffXzjZy9vx0AcFkCAGECAGECAGECAGECAGECAGH5HQDcYgcAXJYAQJgAQJgAQJgAQJgAQJgAQJj/B7D536uPXj/b7s83YgcAXJYAQJgAQJgAQJgAQJgAQJgAQJgdwOQdwO7vf9bq5zt7fzsA4LIEAMIEAMIEAMIEAMIEAMIEAMLsAAbnxGetPuc+a/edgh3Abb4BQJgAQJgAQJgAQJgAQJgAQJgAQJgdwORz6t3f/yw7ADsA4E4JAIQJAIQJAIQJAIQJAIQJAITZAWx+Tm0HcJsdwG2+AUCYAECYAECYAECYAECYAECYAECYHcDkc+LZ9x+9frbdn2/EDgC4LAGAMAGAMAGAMAGAMAGAMAGAsPwO4KyzOwDWOnvOP2IHANwtAYAwAYAwAYAwAYAwAYAwAYCwy+8AYCU7AOBuCQCECQCECQCECQCECQCECQCEbb8DGLETYKbROf+IHQCwjABAmABAmABAmABAmABAmABA2N3vAEbO7gRgptXn/CO+AUCYAECYAECYAECYAECYAECYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALCRh4c/iV1wPU7yGDQAAAAASUVORK5CYII=">
     <svg class="twitch-icon-src" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2800"><g><polygon class="st0" points="2200,1300 1800,1700 1400,1700 1050,2050 1050,1700 600,1700 600,200 2200,200  "/><g><g id="Layer_1-2"><path class="st1" d="M500,0L0,500v1800h600v500l500-500h400l900-900V0H500z M2200,1300l-400,400h-400l-350,350v-350H600V200h1600     V1300z"/><rect x="1700" y="550" class="st1" width="200" height="600"/><rect x="1150" y="550" class="st1" width="200" height="600"/></g></g></g></svg>
     <svg class="twitch-icon-white-src" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2800"><g><g><path d="M500,0L0,500v1800h600v500l500-500h400l900-900V0H500z M2200,1300l-400,400h-400l-350,350v-350H600V200h1600 V1300z"/><rect x="1700" y="550" width="200" height="600"/><rect x="1150" y="550" width="200" height="600"/></g></g></svg>
     
     <header>
-        <img src="assets/branding/Girloffs2Logo.png" alt="Girloffs" class="logo">
+        <picture>
+            <source srcset="assets/branding/girloffs-logo.avif" type="image/avif">
+            <img src="assets/branding/girloffs-logo.webp" alt="Girloffs" class="logo">
+        </picture>
         <nav>
-            <a href="#bracket" class="active mc-shadow" data-text="Bracket">Bracket</a>
-            <a href="#schedule" class="mc-shadow" data-text="Schedule">Schedule</a>
-            <a href="#players" class="mc-shadow" data-text="Players">Players</a>
-            <a href="#results" class="mc-shadow" data-text="Results" style="opacity:60%;pointer-events: none;">Results</a>
+            <a href="#bracket" class="active">Bracket</a>
+            <a href="#schedule">Schedule</a>
+            <a href="#players">Players</a>
+            <a href="#results" style="opacity:60%;pointer-events: none;">Results</a>
         </nav>
         <div class="next-match-widget">
-            <div class="next-match-label mc-shadow" data-text="Next Match">Next Match</div>
+            <div class="next-match-label">Next Match</div>
             <div class="pixel-box-shadow">
                 <div class="next-match-timer pixel-box" id="header-countdown"></div>
             </div>
@@ -77,11 +90,117 @@
             <div class="players-container" id="players-container"></div>
         </section>
         <section id="results" class="tab-content">Results</section>
+        <section id="credits" class="tab-content">
+            <div class="credits-container">
+                <div class="credits-root">credits/</div>
+                <ul class="credits-tree">
+                    <li>logo/
+                        <ul>
+                            <li><a href="https://x.com/found2fast" target="_blank" rel="noopener">Found <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>obs graphics/
+                        <ul>
+                            <li><a href="https://www.youtube.com/@emnersonn" target="_blank" rel="noopener">Emnerson <span class="credit-site">(youtube)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>posters/trailer/
+                        <ul>
+                            <li><a href="https://x.com/chicory__root" target="_blank" rel="noopener">Sonya <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>music/
+                        <ul>
+                            <li><a href="https://x.com/aleenswagg" target="_blank" rel="noopener">Aleen <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>webdev/
+                        <ul>
+                            <li><a href="https://x.com/noranixi" target="_blank" rel="noopener">NoraNixi <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>host/
+                        <ul>
+                            <li><a href="https://x.com/mollyyxy" target="_blank" rel="noopener">Molly <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>production/
+                        <ul>
+                            <li><a href="https://x.com/erynfilms" target="_blank" rel="noopener">Eryn <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>seedfind/
+                        <ul>
+                            <li><a href="https://x.com/marin774_" target="_blank" rel="noopener">Marin <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://www.twitch.tv/caaady_" target="_blank" rel="noopener">Cady <span class="credit-site">(twitch)</span></a></li>
+                            <li><a href="https://x.com/Eris323957" target="_blank" rel="noopener">Eris <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/aleenswagg" target="_blank" rel="noopener">Aleen <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>commentary/
+                        <ul>
+                            <li><a href="https://x.com/ZoeEmerald7" target="_blank" rel="noopener">ZoeEmerald <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/rosebeams_" target="_blank" rel="noopener">Rosebeams <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/verclercswiftie" target="_blank" rel="noopener">Caro <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/ghostiefruit" target="_blank" rel="noopener">Ghostie <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/Eris323957" target="_blank" rel="noopener">Eris <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/wmaccc" target="_blank" rel="noopener">Mac <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/Cookieaddicts2" target="_blank" rel="noopener">Cookieaddicts <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/Oxidiot_" target="_blank" rel="noopener">Robin <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>help/
+                        <ul>
+                            <li><a href="https://x.com/TubboLive" target="_blank" rel="noopener">Tubbo <span class="credit-site">(twitter)</span></a></li>
+                            <li><a href="https://x.com/r0hkx" target="_blank" rel="noopener">r0hkx <span class="credit-site">(twitter)</span></a></li>
+                        </ul>
+                    </li>
+                    <li>charity/
+                        <ul>
+                            <li><a href="https://www.heart.org/" target="_blank" rel="noopener">heart.org</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="credits-art" aria-hidden="true"><pre>
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠶⢄
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⢀⠎
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠄⠂⠁⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⢀⡤⠞⠲⣄⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⠂⠎⠀⠀⣶⠟⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⣠⣤⣤⡀⠀⠰⠟⢸⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠋⠉⠳⠁⠀⣸⠇⠀⢾⡷⠘⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠣⠄⠀⢀⠔⣁⣤⣤⣤⣀⠀⠂⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⡸⠋⠉⠉⠙⢿⣷⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢣⣠⣶⡆⠀⢸⣿⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣀⠀⠀⠀⠀⣠⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⢠⡾⠃⡀⠀⠀⠀⠀⠀⠀⠀
+⢀⣴⡿⠿⠿⢷⣤⡾⠛⠛⠛⢿⣷⡄⠀⠀⠀⠀⠀⠀⠀⢀⡴⠛⡡⠎⠀⠀⠀⠀⠀⠀⠀⠀
+⢾⣿⠀⠀⠀⠀⠙⠀⠀⠀⠀⠀⣿⠇⠀⠀⠀⠀⣀⡴⠚⣡⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠘⢿⣄⠀⠀⠀⠀⠀⠀⠀⢀⡼⠋⠀⢀⣠⠔⠛⠁⣴⠞⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠙⠳⣄⡀⠀⠀⠀⡴⠋⢀⣠⠞⠉⠀⠀⠀⣸⡇⣴⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠹⠀⢀⡌⠀⣠⡿⠁⠀⠀⠀⠀⠀⠹⣄⠈⣠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠎⢀⣾⠏⠀⠀⢀⣤⣤⣤⣄⠀⠉⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢸⠀⣾⡇⠀⠀⢐⣋⣤⡀⠀⠙⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠸⣿⡀⠀⠀⠈⠻⠿⠋⠀⠀⣿⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢿⣷⡀⠀⠀⠀⠀⠀⠀⣴⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢁⠈⠻⣿⣶⣤⣄⣤⣴⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠆⠀⠀⠉⠙⠛⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠐⢠⠀⠿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⢰⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣠⠒⣶⣦⠀⢸⠀⡇⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣿⣄⠈⢁⣴⠟⢀⠇⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠈⠙⠛⠛⠁⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣀⣀⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢾⣅⣉⣠⡼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠉⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre></div>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <a href="#">Twitch</a>
-        <a href="#">Twitter</a>
+        <a href="https://twitch.tv/mollyyxy" target="_blank" rel="noopener">Twitch</a>
+        <a href="https://x.com/mollyyxy" target="_blank" rel="noopener">Twitter</a>
+        <a href="#credits" class="credits-link">Credits</a>
         <div class="tz-selector-wrap">
             <span class="tz-label">time shown in</span>
             <select class="tz-select" id="tz-select"></select>
