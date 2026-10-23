@@ -326,12 +326,6 @@ def main():
     players()
     print("Girloffs 3 player heads")
     heads()
-    print("Girloffs 2 images")
-    image("girloffs2/logos", SRC2 / "branding/GirloffsLogo.png", "girloffs-logo-pixel", "pixel")
-    image("girloffs2/logos", SRC2 / "branding/Girloffs2Logo.png", "girloffs2-logo-pixel", "pixel")
-    for n in (1, 2, 3, 4):
-        # the old -720p/-340p files were smaller copies of these; regenerated from the full-size originals
-        image("girloffs2/gradients", SRC2 / f"branding/gradient{n}.png", f"gradient{n}", "smooth", (1920, 1280, 640))
     print("Fonts")
     fonts([("girloffs3/fonts", SRC3 / "Escargoth.otf", "escargoth"),
            ("girloffs2/fonts", SRC2 / "fonts/regular.otf", "minecraft-regular"),

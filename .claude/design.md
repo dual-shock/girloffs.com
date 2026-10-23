@@ -94,6 +94,8 @@ Only things that matter for the design: no task logs, no code details that the C
   in width and would wobble every second).
 - Header logo and loading-screen logo: the Girloffs 3 logo with the cream border. The owner tried the no-border
   version on 2026-10-23 and went back to the bordered one.
+- Favicon: the Girloffs 3 app icon (`girloffs3branding/icon.webp`, gradient rounded square with the white "G"),
+  as a 96px PNG in `assets/branding/favicon.png`. It replaced the Girloffs 2 pixel logo.
 - The Girloffs 2 solid grey boxes (`#333`/`#444` name, score, player and schedule-bar backgrounds) don't work with
   the new look anywhere: too solid, "plastered on", cluttered. Replace the grey with something that fits the
   pink/orange video. Bracket: only the grey needs to change, the layout is fine.
