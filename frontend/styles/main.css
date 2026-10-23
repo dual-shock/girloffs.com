@@ -30,6 +30,16 @@ body {
     z-index: -1;
 }
 
+/* iOS Low Power Mode blocks autoplay and draws a play button on the video; nav.js starts it on the first tap */
+.bg-video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+}
+
+.bg-video::-webkit-media-controls {
+    display: none !important;
+}
+
 /* the lineup (brand recolour baked in by tools/tint_lineup.py) sits under the gradient and is never hidden itself,
    because phones pause hidden muted videos; on Players the gradient is hidden once the lineup plays */
 .bg-gradient {
@@ -747,7 +757,14 @@ main {
 }
 
 .twitch-icon-src .st1 {
-    fill: #9146FF;
+    fill: url(#brand-gradient);
+}
+
+/* holds the brand gradient the Twitch icons use; display: none would stop the gradient from rendering */
+.svg-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
 }
 
 .twitch-icon-white-src {
@@ -771,9 +788,12 @@ main {
     overflow: hidden;
 }
 
+/* above the list, so it glides over the other cards on phones */
 .player-featured {
     grid-column: 1;
     grid-row: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .player-render {
@@ -831,17 +851,6 @@ main {
     height: 100%;
 }
 
-/* drawn like a Minecraft item-stack count: white, hard grey shadow, bottom-right */
-.player-item-seed {
-    position: absolute;
-    right: 0.1em;
-    bottom: 0;
-    font-size: 1.25em;
-    line-height: 1;
-    color: var(--white);
-    text-shadow: 0.1em 0.1em 0 #3f3f3f;
-}
-
 .player-info {
     flex: 1;
     display: flex;
@@ -873,12 +882,24 @@ main {
     white-space: nowrap;
 }
 
-.player-mc-name {
+/* Minecraft name, then the seed as N/22 */
+.player-info-bottom {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6em;
+    min-width: 0;
     font-size: 0.85em;
     opacity: 0.6;
+}
+
+.player-mc-name {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.player-item-seed {
+    flex-shrink: 0;
 }
 
 .player-links {

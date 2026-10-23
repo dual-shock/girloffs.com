@@ -64,7 +64,11 @@ Only things that matter for the design: no task logs, no code details that the C
   the whole header/footer; the lineup only in the content area (with or without a slow pan).
 - Transitions: short and only where they hide loading. Tab switches fade the content in quickly and crossfade the
   background (so the Players lineup arriving late doesn't pop); 0.8s was far too long, none at all felt abrupt.
-  Player swaps stay instant. Card hovers fade their background like Schedule rows do.
+  Card hovers fade their background like Schedule rows do. Player swaps: instant on desktop (nothing moves far);
+  on tablet/phone the tapped card glides up into the featured slot while the list scrolls back to the top, because
+  an instant jump from far down the list felt harsh.
+- Background videos must never show the browser's play button (iOS Low Power Mode blocks autoplay and puts one in
+  the middle of the page); they start on the first tap instead.
 - One hover colour for text links site-wide (nav, Twitch, footer, credits): deep berry, the same colour as the boxes.
   Pale pink hovers were unreadable on the pink gradient; berry reads on both the orange and the pink.
 - Header: the left side (logo + nav) is perfect on desktop, don't change it. The countdown keeps Escargoth but
@@ -108,9 +112,11 @@ Only things that matter for the design: no task logs, no code details that the C
 - Players cards (owner, 2026-10-23): no structure, uneven; pronouns look slapped in; the spacing between cards is
   awkward. Needs a clear, even internal layout. Now every card: head | bold display name + dim pronouns right
   after it / dim Minecraft name below | Twitch + Ranked icons (same visible size). Display name is the main name
-  because Bracket and Schedule show display names. The seed sits on the head like a Minecraft item-stack count
-  (white, hard grey shadow, bottom-right) instead of floating in the gap between columns, so all gaps are equal.
+  because Bracket and Schedule show display names. The seed is written as "N/22" next to the Minecraft name
+  (owner; it used to sit on the head like an item-stack count, which the new head renders cover).
   Everything in a card is sized in em from one font size, so it scales together.
+- Card icons (Twitch, MCSR Ranked) are recoloured to the brand gradient (orange top-left to pink bottom-right), like
+  the lineup: their own purple and green felt out of place. White parts stay white, the ranked outline is berry.
 - Schedule (owner, 2026-10-23): on two-column desktop the match bars are far too long with nothing in them; colours,
   font and overall look feel out of place with the current styling. Now each row looks like the Bracket: a denser
   berry time cell with white digits (no more white chip with hot-pink text), then a fixtures-table row:

@@ -23,6 +23,19 @@ function setLineupBg(on) {
     }
 }
 
+// iOS Low Power Mode blocks autoplay, so the background can still be paused: any tap starts it
+function resumeBackground() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('lineup-bg')) return;
+    if (document.querySelector('#players.active')) {
+        setLineupBg(true);
+    } else {
+        var gradient = document.querySelector('.bg-gradient');
+        if (gradient.paused) gradient.play().catch(() => {});
+    }
+}
+document.addEventListener('touchend', resumeBackground);
+document.addEventListener('click', resumeBackground);
+
 export function showPlayer(seed) {
     activateTab('#players');
     featurePlayer(seed);

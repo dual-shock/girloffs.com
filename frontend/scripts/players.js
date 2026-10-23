@@ -1,5 +1,6 @@
 var featuredSeed = 1;
 var lastState = null;
+var glideFrame = null;
 
 export function renderPlayers(state) {
     lastState = state;
@@ -25,7 +26,29 @@ export function renderPlayers(state) {
 export function featurePlayer(seed) {
     featuredSeed = seed;
     if (lastState) renderPlayers(lastState);
-    document.getElementById('players-container').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// phones/tablets: the tapped card glides up into the featured slot while the list scrolls back to the top
+function glideToFeatured(seed, card) {
+    var container = document.getElementById('players-container');
+    var fromTop = card.getBoundingClientRect().top;
+    var scroll = container.scrollTop;
+    cancelAnimationFrame(glideFrame);
+    featurePlayer(seed);
+    if (!window.matchMedia('(max-width: 1024px)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var featured = container.querySelector('.player-featured');
+    container.scrollTop = scroll;
+    var distance = fromTop - featured.getBoundingClientRect().top;
+    var start = performance.now();
+    function step(now) {
+        var t = Math.min((now - start) / 400, 1);
+        var left = Math.pow(1 - t, 3);
+        container.scrollTop = scroll * left;
+        featured.style.transform = t < 1 ? 'translateY(' + distance * left + 'px)' : '';
+        if (t < 1) glideFrame = requestAnimationFrame(step);
+    }
+    step(start);
 }
 
 function buildRender(player) {
@@ -55,18 +78,9 @@ function buildItem(player, rankedIconSrc, twitchIconSvg) {
     item.className = 'player-item';
     item.dataset.seed = player.seed;
 
-    // the seed sits on the head like a Minecraft item-stack count
     var head = document.createElement('div');
     head.className = 'player-head';
-
-    var avatar = buildPicture('assets/heads/', player, 'player-avatar');
-
-    var seedEl = document.createElement('span');
-    seedEl.className = 'player-item-seed';
-    seedEl.textContent = player.seed;
-
-    head.appendChild(avatar);
-    head.appendChild(seedEl);
+    head.appendChild(buildPicture('assets/heads/', player, 'player-avatar'));
 
     var info = document.createElement('div');
     info.className = 'player-info';
@@ -82,14 +96,23 @@ function buildItem(player, rankedIconSrc, twitchIconSvg) {
     pronouns.className = 'player-pronouns';
     pronouns.textContent = player.pronouns;
 
-    var mcName = document.createElement('div');
+    var bottom = document.createElement('div');
+    bottom.className = 'player-info-bottom';
+
+    var mcName = document.createElement('span');
     mcName.className = 'player-mc-name';
     mcName.textContent = player.mc_name;
 
+    var seedEl = document.createElement('span');
+    seedEl.className = 'player-item-seed';
+    seedEl.textContent = player.seed + '/' + lastState.players.length;
+
     top.appendChild(nameEl);
     top.appendChild(pronouns);
+    bottom.appendChild(mcName);
+    bottom.appendChild(seedEl);
     info.appendChild(top);
-    info.appendChild(mcName);
+    info.appendChild(bottom);
 
     var twitchLink = document.createElement('a');
     twitchLink.className = 'player-twitch-link';
@@ -124,7 +147,7 @@ function buildItem(player, rankedIconSrc, twitchIconSvg) {
 
     content.addEventListener('click', function(e) {
         if (e.target.closest('a')) return;
-        if (player.seed !== featuredSeed) featurePlayer(player.seed);
+        if (player.seed !== featuredSeed) glideToFeatured(player.seed, content);
     });
     return item;
 }
