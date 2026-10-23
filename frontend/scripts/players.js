@@ -35,7 +35,10 @@ function glideToFeatured(seed, card) {
     var scroll = container.scrollTop;
     cancelAnimationFrame(glideFrame);
     featurePlayer(seed);
-    if (!window.matchMedia('(max-width: 1024px)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(max-width: 1024px)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        container.scrollTop = 0;
+        return;
+    }
 
     var featured = container.querySelector('.player-featured');
     container.scrollTop = scroll;
@@ -64,16 +67,33 @@ function buildRender(player) {
     picture.addEventListener('pointerdown', function(e) { downX = e.clientX; downY = e.clientY; });
     picture.addEventListener('click', function(e) {
         if (Math.abs(e.clientX - downX) + Math.abs(e.clientY - downY) > 5) return;  // a drag to rotate, not a click
+        if (!hitsSkin(skin ? skin.viewer.canvas : picture.querySelector('img'), e)) return;
         if (skin) closeSkin();
         else openSkin(player, picture);
     });
     return picture;
 }
 
+// only clicks on the player itself count, not the transparent space around them
+function hitsSkin(el, e) {
+    var w = el.tagName === 'IMG' ? el.naturalWidth : el.width;
+    var h = el.tagName === 'IMG' ? el.naturalHeight : el.height;
+    if (!w || !h) return false;
+    var r = el.getBoundingClientRect();
+    var scale = Math.min(r.width / w, r.height / h);  // the render is object-fit: contain
+    var x = Math.floor((e.clientX - r.left - (r.width - w * scale) / 2) / scale);
+    var y = Math.floor((e.clientY - r.top - (r.height - h * scale) / 2) / scale);
+    if (x < 0 || y < 0 || x >= w || y >= h) return false;
+    var pixel = document.createElement('canvas').getContext('2d');
+    pixel.drawImage(el, x, y, 1, 1, 0, 0, 1, 1);
+    return pixel.getImageData(0, 0, 1, 1).data[3] > 0;
+}
+
 function openSkin(player, picture) {
     loadSkinview().then(function(skinview3d) {
         if (skin || !picture.isConnected) return;
-        var viewer = new skinview3d.SkinViewer({ skin: 'assets/skins/' + player.seed + '.png' });
+        // preserveDrawingBuffer keeps the last frame readable for hitsSkin
+        var viewer = new skinview3d.SkinViewer({ skin: 'assets/skins/' + player.seed + '.png', preserveDrawingBuffer: true });
         var observer = new ResizeObserver(function(entries) {
             viewer.setSize(entries[0].contentRect.width, entries[0].contentRect.height);
         });

@@ -66,7 +66,8 @@ Only things that matter for the design: no task logs, no code details that the C
   background (so the Players lineup arriving late doesn't pop); 0.8s was far too long, none at all felt abrupt.
   Card hovers fade their background like Schedule rows do. Player swaps: instant on desktop (nothing moves far);
   on tablet/phone the tapped card glides up into the featured slot while the list scrolls back to the top, because
-  an instant jump from far down the list felt harsh.
+  an instant jump from far down the list felt harsh. With reduced motion it still always ends at the top, just
+  without the glide (the featured player must never end up off-screen).
 - Background videos must never show the browser's play button (iOS Low Power Mode blocks autoplay and puts one in
   the middle of the page); they start on the first tap instead.
 - One hover colour for text links site-wide (nav, Twitch, footer, credits): deep berry, the same colour as the boxes.
@@ -126,4 +127,5 @@ Only things that matter for the design: no task logs, no code details that the C
   row outlines it in white, like the featured player card. Everything in a row is sized in em from one font size.
 - Players easter egg (owner, 2026-10-23): clicking the featured render swaps it for a rotatable 3D model of their
   skin (skinview3d, self-hosted in `vendor/`, loaded only on that first click); clicking again swaps back. The
-  render stays the default and there's no visible hint. Skins live in `assets/skins/<seed>.png`.
+  render stays the default and there's no visible hint. Skins live in `assets/skins/<seed>.png`. Only a click on
+  the player itself counts (a visible pixel of the render or the 3D model), not the transparent space around it.
