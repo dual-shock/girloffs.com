@@ -115,6 +115,7 @@ function logError(err) {
 
 document.querySelectorAll('nav a, .credits-link').forEach(link => {
     link.addEventListener('click', e => {
+        if (!link.getAttribute('href')?.startsWith('#')) return;
         e.preventDefault();
         activateTab(link.getAttribute('href'));
         if (link.getAttribute('href') === '#bracket') drawBracketLines();
