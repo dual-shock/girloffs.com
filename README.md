@@ -75,7 +75,7 @@ Locally, use `.venv\Scripts\python` instead of `python`.
 ## Production (Unraid + Cloudflare)
 
 How a visitor gets the site:
-- **girloffs.com** is Cloudflare Pages, deployed automatically from the `frontend/` folder of the `girloffs3` branch on every push.
+- **girloffs.com** is Cloudflare Pages, deployed automatically from the `frontend/` folder of the `girloffs3` branch on every push. A push is live within a minute, so check changes locally first. `www.girloffs.com` is redirected by a Cloudflare Redirect Rule. Visitor stats: Workers & Pages → girloffs → Metrics (Cloudflare Web Analytics, no cookies).
 - **api.girloffs.com** is Cloudflare in front of the app on Unraid. Cloudflare keeps `/api/state` for 5 seconds, so the server only sees a few requests per Cloudflare location no matter how many people watch. If the server is down, Cloudflare keeps serving the last state.
 - **admin.girloffs.com** goes through the same tunnel to the same app, behind a Cloudflare Access application covering the whole hostname.
 

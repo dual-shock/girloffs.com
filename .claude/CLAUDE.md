@@ -35,7 +35,11 @@ Website for Girloffs, an MCSR (Minecraft speedrun) tournament. Girloffs 3 runs S
 - Docker/Unraid: see Production. The compose stack publishes no ports, so to click around locally use the venv server, not Docker. SQLite stays in the default rollback journal: WAL is avoided because Unraid's `/mnt/user` FUSE layer and SQLite WAL don't mix well.
 
 ## Production (decided 2026-10-23: Unraid origin, everything public goes through Cloudflare)
-- **girloffs.com**: Cloudflare Pages project, Git-connected, production branch `girloffs3`, build output `frontend`, no build command. `API_BASE` in `main.js` points girloffs.com and `*.pages.dev` at `https://api.girloffs.com`.
+- **girloffs.com**: Cloudflare Pages project `girloffs`, Git-connected, production branch `girloffs3`, build output `frontend`, no build command.
+  - DNS: apex CNAME → `girloffs.pages.dev` (proxied); the old GitHub A records are deleted.
+  - `www` is redirected by a zone Redirect Rule ("www to root", 301).
+  - Analytics: Cloudflare Web Analytics, enabled on the Pages project, which injects the beacon on deploy. Google Analytics was removed.
+  - `API_BASE` in `main.js` points girloffs.com and `*.pages.dev` at `https://api.girloffs.com`.
 - **api.girloffs.com**: Cloudflare Tunnel `girloffs` (its own tunnel, separate from the owner's existing Unraid tunnel) → `http://girloffs:8000`. Zone settings it relies on:
   - Cache Rule: `/api/state` eligible for cache; Edge TTL = origin header; Browser TTL = respect origin.
   - Zone Browser Cache TTL = "Respect Existing Headers". It was 4h, which would override `max-age=5`.
@@ -71,11 +75,11 @@ Website for Girloffs, an MCSR (Minecraft speedrun) tournament. Girloffs 3 runs S
 ## Conventions
 - Match the surrounding code: frontend uses `var`/`function` style like the original site; keep comments sparse.
 - Keep changes minimal and incremental; the owner tests each phase before the next.
-- `main` still deploys the old site to GitHub Pages from the repo root until girloffs.com is switched to Cloudflare Pages. After that, GitHub Pages gets disabled and `frontend/CNAME` can go. Work happens on the `girloffs3` branch.
+- girloffs.com is served from Cloudflare Pages since 2026-10-23, and GitHub Pages is turned off. Pushing to `girloffs3` deploys to production straight away, so test locally first. `main` still holds the Girloffs 2 site and deploys nothing.
 
 ## Roadmap
 1. ~~Backend core + poller + frontend reading the API (same styling)~~ (done)
-2. Deploy: Unraid origin behind Cloudflare Tunnel at `api.girloffs.com`, frontend on Cloudflare Pages, Web Analytics (in progress)
+2. ~~Deploy: Unraid origin behind Cloudflare Tunnel at `api.girloffs.com`, frontend on Cloudflare Pages, Web Analytics~~ (live 2026-10-23)
 3. ~~Admin panel behind Cloudflare Access (players, match times, overrides, exclude games, audit log)~~ (built 2026-10-23; needs the Access app + `.env` on the server)
 4. ~~Server-Sent Events~~ replaced by edge-cached polling (done: 10s poller, 5s edge cache, 10s browser refresh)
 5. Redesign: Girloffs 3 branding, video background (webm + mp4 fallback), woff2 fonts, credits/results pages
