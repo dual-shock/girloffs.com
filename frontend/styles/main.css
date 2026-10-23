@@ -32,28 +32,42 @@ body {
 
 /* the lineup (brand recolour baked in by tools/tint_lineup.py) sits under the gradient and is never hidden itself,
    because phones pause hidden muted videos; on Players the gradient is hidden once the lineup plays */
+.bg-gradient {
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
 body.lineup-bg .bg-gradient {
+    opacity: 0;
     visibility: hidden;
 }
 
 /* on Players the lineup behind the header and footer is blurred, strongest at the page edge and fading out towards
    the content; it's a separate layer under the text so the text itself stays sharp. The slight hue shift, saturation
    and brightness turn the darkened top-left from mustard yellow into a proper orange */
-body.lineup-bg header::before,
-body.lineup-bg footer::before {
+header::before,
+footer::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
     -webkit-backdrop-filter: blur(12px) hue-rotate(-5deg) saturate(1.4) brightness(1.1);
     backdrop-filter: blur(12px) hue-rotate(-5deg) saturate(1.4) brightness(1.1);
     -webkit-mask-image: linear-gradient(black 25%, transparent);
     mask-image: linear-gradient(black 25%, transparent);
 }
 
-body.lineup-bg footer::before {
+footer::before {
     -webkit-mask-image: linear-gradient(transparent, black 75%);
     mask-image: linear-gradient(transparent, black 75%);
+}
+
+body.lineup-bg header::before,
+body.lineup-bg footer::before {
+    opacity: 1;
+    visibility: visible;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -78,35 +92,6 @@ body.lineup-bg footer::before {
         0 0.15em 0 black;
     opacity: 0.45;
     pointer-events: none;
-}
-
-.pixel-box {
-    background: var(--white);
-    clip-path: polygon(
-        4px 0, calc(100% - 4px) 0,
-        calc(100% - 4px) 2px,
-        calc(100% - 2px) 2px,
-        calc(100% - 2px) 4px,
-        100% 4px,
-        100% calc(100% - 4px),
-        calc(100% - 2px) calc(100% - 4px),
-        calc(100% - 2px) calc(100% - 2px),
-        calc(100% - 4px) calc(100% - 2px),
-        calc(100% - 4px) 100%,
-        4px 100%,
-        4px calc(100% - 2px),
-        2px calc(100% - 2px),
-        2px calc(100% - 4px),
-        0 calc(100% - 4px),
-        0 4px,
-        2px 4px,
-        2px 2px,
-        4px 2px
-    );
-}
-
-.pixel-box-shadow {
-    filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.45));
 }
 
 header, footer {
@@ -163,96 +148,66 @@ nav a.active {
     text-underline-offset: 0.2em;
 }
 
-.header-actions {
+/* Next Match and On Twitch: two matching label-over-value blocks on the nav's line */
+.header-status {
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    border: 0px solid yellow;
+    gap: 2.2em;
+    padding-right: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.status-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+
+.status-label {
+    font-size: 0.6em;
+    letter-spacing: 0.12em;
+    opacity: 0.8;
+}
+
+.status-value {
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.twitch-status {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
 }
 
 .twitch-link {
     color: var(--twitch-link-color);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding-right: 1.5rem;
     transition: color 0.3s ease;
-    white-space: nowrap;
-}
-
-.twitch-link:hover {
-    color: var(--twitch-link-hover-color);
-    text-decoration: underline;
-}
-
-.twitch-link svg {
-    height: 1em;
-    width: 1em;
-    display: block;
-    flex-shrink: 0;
-}
-
-.twitch-link .new-tab-icon {
-    height: 1.2em;
-    width: 1.2em;
 }
 
 .twitch-link.twitch-live {
     color: var(--twitch-link-live-color);
 }
 
-.twitch-link.twitch-live:hover {
-    color: var(--twitch-link-live-hover-color);
-}
-
 .twitch-link.twitch-offline {
     color: var(--twitch-link-offline-color);
 }
 
-.twitch-link.twitch-offline:hover {
-    color: var(--twitch-link-offline-hover-color);
+.twitch-link:hover {
+    color: var(--twitch-link-hover-color);
 }
 
-.new-tab-icon {
-    height: 1.2em;
-    width: 1.2em;
-    fill: var(--white);
+.twitch-link svg {
+    display: block;
+    height: 0.85em;
+    width: 0.85em;
     flex-shrink: 0;
-    vertical-align: middle;
 }
 
 .tz-select {
     font-family: inherit;
-}
-
-.next-match-widget {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.next-match-label {
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    color: var(--white);
-    padding-bottom: 2px;
-}
-
-.next-match-timer {
-    font-size: 1.6rem;
-    line-height: 1;
-    color: var(--hot-pink);
-    text-shadow:
-        0 0.05em 0 #F4006E,
-        0 0.1em 0 #F4006E;
-    padding: 0.14em 0.3em 0.04em;
-    text-align: center;
-    white-space: nowrap;
-    display: inline-block;
 }
 
 /* Escargoth has proportional digits; fixed slots stop the countdown from wobbling every second */
@@ -282,6 +237,11 @@ main {
 .tab-content.active {
     display: block;
     height: 100%;
+    animation: tab-in 0.2s ease-out;
+}
+
+@keyframes tab-in {
+    from { opacity: 0; }
 }
 
 .bracket-scroll {
@@ -796,7 +756,7 @@ main {
 
 .twitch-icon-white-src path,
 .twitch-icon-white-src rect {
-    fill: var(--white);
+    fill: currentColor;
 }
 
 /* 4 x 7: the featured player's card and render fill the left column, the other 21 fill the rest */
@@ -805,7 +765,7 @@ main {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(7, 1fr);
     grid-auto-rows: 1fr;
-    gap: 0.5rem;
+    gap: 0.8rem;
     padding: 1rem;
     height: 100%;
     overflow: hidden;
@@ -845,8 +805,8 @@ main {
     font-size: 0.9rem;
     min-width: 0;
     min-height:0;
-    overflow:hidden;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .player-head {
@@ -856,11 +816,19 @@ main {
     flex-shrink: 0;
 }
 
+/* the face fills the slot; the hat layer around it pokes out of the card (heads are cropped 625px around a 555px face) */
 .player-avatar {
+    position: absolute;
+    left: -6.3%;
+    top: -6.3%;
+    width: 112.6%;
+    height: 112.6%;
+}
+
+.player-avatar img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 /* drawn like a Minecraft item-stack count: white, hard grey shadow, bottom-right */
@@ -1112,10 +1080,15 @@ footer a:hover {
     padding: 0;
     text-decoration: none;
     border-bottom: none;
-    box-shadow: 0 1px 0 0 var(--white);
+    box-shadow: 0 1px 0 0 currentColor;
+    transition: color 0.3s ease;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+.tz-select:hover {
+    color: var(--footer-link-hover-color);
 }
 
 .tz-select option {
@@ -1138,7 +1111,7 @@ footer a:hover {
     }
 
     .players-container {
-        gap: clamp(0.5rem, 0.7vw, 1.2rem);
+        gap: clamp(0.8rem, 1.1vw, 1.8rem);
     }
 
     .player-item {
@@ -1156,16 +1129,9 @@ footer a:hover {
         justify-content: center;
     }
 
-    .next-match-label {
-        font-size: clamp(0.85rem, 0.9vw, 1.1rem);
-    }
-
-    .next-match-timer {
-        font-size: clamp(1.6rem, 1.7vw, 2.2rem);
-    }
-
-    .twitch-link {
-        font-size: clamp(1rem, 1vw, 1.3rem);
+    .header-status {
+        font-size: clamp(1rem, 1.5vw, 2.2rem);
+        padding-right: clamp(1rem, 2vw, 3rem);
     }
 
     footer {
@@ -1221,10 +1187,9 @@ footer a:hover {
     }
     header {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto 1fr auto;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: minmax(0, 1fr) auto;
         height: 18vh;
-        overflow: visible;
         gap: 0;
     }
     footer {
@@ -1234,48 +1199,27 @@ footer a:hover {
     }
     .logo {
         grid-column: 1;
-        grid-row: 2;
-        width: auto;
-        height: calc(100% + 1.5vh);
-        min-height: 0;
-        object-fit: contain;
-        object-position: left bottom;
-        align-self: end;
-        margin-right: 0;
-        margin-top: -3.5vh;
-        z-index: 1;
-    }
-    .header-actions {
-        grid-column: 2;
-        grid-row: 2;
-        justify-self: end;
-        align-self: center;
-        margin-left: 0;
-    }
-    .twitch-link {
-        padding-right: 1rem;
-        font-size: min(2vh, 4vmax);
-    }
-    .next-match-widget {
-        grid-column: 1 / -1;
         grid-row: 1;
-        flex-direction: row;
-        align-items: center;
+        min-height: 0;
+        margin-right: 0;
+    }
+    .header-status {
+        grid-column: 2;
+        grid-row: 1;
+        flex-direction: column;
+        align-items: flex-end;
         justify-content: center;
-        gap: 0.5rem;
-        padding: 6px 0;
+        gap: 0.5em;
+        padding-right: 1rem;
+        font-size: min(2.4vh, 4.5vw);
+        text-align: right;
     }
-    .next-match-label {
-        font-size: min(2vh, 4vmax);
-        padding-bottom: 0;
-    }
-    .next-match-timer {
-        font-size: min(3vh, 5vmax);
-        padding: 0 6px;
+    .status-block {
+        align-items: flex-end;
     }
     nav {
         grid-column: 1 / -1;
-        grid-row: 3;
+        grid-row: 2;
         justify-content: center;
         align-items: center;
         gap: 2rem;
@@ -1306,7 +1250,7 @@ footer a:hover {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: none;
         overflow-y: auto;
-        gap: 0.75rem;
+        gap: 1rem;
     }
     .player-render {
         grid-row: 2 / span 5;
@@ -1322,21 +1266,11 @@ footer a:hover {
     }
 }
 @media (max-width: 700px) {
-    .logo {
-        height: 100%;
-        margin-top: 0;
-    }
     nav a {
         font-size: clamp(1.5rem, 3vh, 2rem);
     }
     nav {
         gap: 1rem;
-    }
-    .next-match-label {
-        font-size: clamp(1.2rem, 2.5vh, 1.7rem);
-    }
-    .next-match-timer {
-        font-size: clamp(1.5rem, 3vh, 2rem);
     }
     .players-container {
         grid-template-columns: 1fr;
@@ -1370,24 +1304,12 @@ footer a:hover {
     nav a {
         font-size: clamp(1rem, 2vh, 2rem);
     }
-    .next-match-label {
-        font-size: clamp(0.8rem, 1.7vh, 1.7rem);
-    }
-    .next-match-timer {
-        font-size: clamp(1rem, 2vh, 2rem);
-    }
 }
 @media (max-width: 350px) {
     nav a {
         font-size: clamp(1rem, 1.75vh, 2rem);
     }
-    .next-match-label {
-        font-size: clamp(0.8rem, 1.5vh, 1.7rem);
-    }
     nav {
         gap: 0.5rem;
-    }
-    .next-match-timer {
-        font-size: clamp(1rem, 1.75vh, 2rem);
     }
 }

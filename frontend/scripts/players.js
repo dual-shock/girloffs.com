@@ -29,15 +29,19 @@ export function featurePlayer(seed) {
 }
 
 function buildRender(player) {
+    return buildPicture('assets/players/', player, 'player-render');
+}
+
+function buildPicture(dir, player, className) {
     var picture = document.createElement('picture');
-    picture.className = 'player-render';
+    picture.className = className;
 
     var source = document.createElement('source');
     source.type = 'image/avif';
-    source.srcset = 'assets/players/' + player.seed + '.avif';
+    source.srcset = dir + player.seed + '.avif';
 
     var img = document.createElement('img');
-    img.src = 'assets/players/' + player.seed + '.webp';
+    img.src = dir + player.seed + '.webp';
     img.alt = player.mc_name;
     img.addEventListener('error', function() { img.style.visibility = 'hidden'; });
 
@@ -55,10 +59,7 @@ function buildItem(player, rankedIconSrc, twitchIconSvg) {
     var head = document.createElement('div');
     head.className = 'player-head';
 
-    var avatar = document.createElement('img');
-    avatar.className = 'player-avatar';
-    avatar.src = 'https://mc-heads.net/avatar/' + player.mc_name;
-    avatar.alt = player.mc_name;
+    var avatar = buildPicture('assets/heads/', player, 'player-avatar');
 
     var seedEl = document.createElement('span');
     seedEl.className = 'player-item-seed';

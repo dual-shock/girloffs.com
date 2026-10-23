@@ -62,7 +62,18 @@ Only things that matter for the design: no task logs, no code details that the C
   for the outer quarter) and fading to sharp towards the content. The blur also nudges hue/saturation/brightness
   so the top-left reads as a pretty orange, not mustard yellow. Tried and dropped: a uniform frosted blur over
   the whole header/footer; the lineup only in the content area (with or without a slow pan).
-- No transitions on tab switches or player swaps: the owner wants the site snappy, not animated.
+- Transitions: short and only where they hide loading. Tab switches fade the content in quickly and crossfade the
+  background (so the Players lineup arriving late doesn't pop); 0.8s was far too long, none at all felt abrupt.
+  Player swaps stay instant. Card hovers fade their background like Schedule rows do.
+- One hover colour for text links site-wide (nav, Twitch, footer, credits): deep berry, the same colour as the boxes.
+  Pale pink hovers were unreadable on the pink gradient; berry reads on both the orange and the pink.
+- Header: the left side (logo + nav) is perfect on desktop, don't change it. The countdown keeps Escargoth but
+  lost the Girloffs 2 white pixel box and its double pink shadow ("2 visible layers of text", ugly). The right side
+  is two matching label-over-value blocks (Next Match / On Twitch) on the nav's line. Tablet/phone: logo left with
+  the two blocks stacked right of it, nav below; the old separate countdown row left dead space in the middle.
+- Player heads: the owner's head renders (`girloffs3branding/PLAYER HEADS/<IGN>.png`), not mc-heads.net. The face
+  fills the card's head slot and the outer hat layer pokes slightly out of the card (wanted), so cards get a
+  little more gap. Heads live in `assets/heads/<seed>`.
 - Players background must stay calm (the raw lineup looked "messy, jumbled, illegible"): the lineup is greyscaled
   and recoloured with the brand gradient, orange top-left to pink bottom-right (pink top-left was tried; the
   owner preferred orange), and baked slightly darker (brightness 0.88). Heavier darkening (brightness 0.8 plus a
@@ -101,4 +112,9 @@ Only things that matter for the design: no task logs, no code details that the C
   (white, hard grey shadow, bottom-right) instead of floating in the gap between columns, so all gaps are equal.
   Everything in a card is sized in em from one font size, so it scales together.
 - Schedule (owner, 2026-10-23): on two-column desktop the match bars are far too long with nothing in them; colours,
-  font and overall look feel out of place with the current styling.
+  font and overall look feel out of place with the current styling. Now each row looks like the Bracket: a denser
+  berry time cell with white digits (no more white chip with hot-pink text), then a fixtures-table row:
+  round (R1/R2/QF/SF/Final/3rd, dim) | player 1 right-aligned | score, or "vs" before any games | player 2 |
+  Next!/Live!. Rows max 38em wide, centered in each day column. Time cell per state: Next brand pink, Live light
+  pink, played faded. Phones (≤700px): the row flows left to right (no room for the aligned columns). Clicking a
+  row outlines it in white, like the featured player card. Everything in a row is sized in em from one font size.

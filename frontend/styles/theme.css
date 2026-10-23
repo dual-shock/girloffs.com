@@ -31,6 +31,9 @@
 
     /* ? GLOBAL SELECTION & HOVER */
         --selection-border-color: var(--white);
+        /* every text link's hover (nav, Twitch, footer, credits): berry reads on both the orange and the pink */
+        --link-hover-color: rgb(70, 18, 48);
+        --link-hover-color: rgb(153, 236, 236);
         --unselected-opacity: 0.85;
         --unselected-brightness: 0.85;
 
@@ -146,19 +149,15 @@
         /* NAV LINKS */
         --nav-color: #fdfcfdd5;
         --nav-active-color: #fdfcfd;
-        --nav-hover-color: #fdfcfdf1;
+        --nav-hover-color: var(--link-hover-color);
 
         /* TWITCH LINK */
         --twitch-link-color: var(--white);
-        --twitch-link-hover-color: var(--pale-pink);
-
-        --twitch-link-live-color: #fdfcfdd5; 
-        --twitch-link-live-hover-color: #fdfcfdf1;
-
-        --twitch-link-offline-color: #fdfcfda3; 
-        --twitch-link-offline-hover-color: #fdfcfdb9;
+        --twitch-link-hover-color: var(--link-hover-color);
+        --twitch-link-live-color: var(--white);
+        --twitch-link-offline-color: #fdfcfda3;
 
     /* ? FOOTER */
         --footer-link-color: #fdfcfd;
-        --footer-link-hover-color: #fbb4c0;
+        --footer-link-hover-color: var(--link-hover-color);
 }

@@ -42,20 +42,12 @@ function rebuildTwitchLink() {
         label = 'Offline';
     }
 
-    link.textContent = '';
+    var status = link.querySelector('.twitch-status');
+    status.textContent = '';
     link.classList.toggle('twitch-live', streamIsLive);
     link.classList.toggle('twitch-offline', !streamIsLive);
-    link.href = 'https://twitch.tv/mollyyxy';
-    link.appendChild(twitchWhite.cloneNode(true));
-    link.appendChild(document.createTextNode(label));
-
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.classList.add('new-tab-icon');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', 'M 3 3 L 3 21 L 21 21 L 21 12 L 19 12 L 19 19 L 5 19 L 5 5 L 12 5 L 12 3 L 3 3 z M 14 3 L 14 5 L 17.585938 5 L 8.2929688 14.292969 L 9.7070312 15.707031 L 19 6.4140625 L 19 10 L 21 10 L 21 3 L 14 3 z');
-    svg.appendChild(path);
-    link.appendChild(svg);
+    status.appendChild(twitchWhite.cloneNode(true));
+    status.appendChild(document.createTextNode(label));
 }
 
 function render(state) {
