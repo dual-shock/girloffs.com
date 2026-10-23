@@ -1,0 +1,10 @@
+.git
+.claude
+backend/.venv
+backend/data
+backend/tests
+data
+archive
+playerinfo.csv
+*.md
+.env

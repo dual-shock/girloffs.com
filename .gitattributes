@@ -1,0 +1,2 @@
+# Config files that end up inside Linux containers must keep LF line endings
+egress/* text eol=lf

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/python -m pytest:*)",
+      "Bash(backend/.venv/Scripts/python -m pytest:*)",
+      "Bash(.venv/Scripts/python -m app.manage list)",
+      "Bash(curl -s https://api.mcsrranked.com/:*)",
+      "WebFetch(domain:docs.mcsrranked.com)"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  }
+}

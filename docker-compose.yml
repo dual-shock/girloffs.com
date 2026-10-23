@@ -1,0 +1,66 @@
+name: girloffs
+
+# Safety settings shared by every container: no root powers, read-only filesystem, capped logs.
+x-locked-down: &locked-down
+  restart: unless-stopped
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  logging:
+    options: {max-size: 10m, max-file: "3"}
+
+services:
+  # The app. Only on the `internal` network: it can't reach your LAN or the internet,
+  # only `egress` (for the MCSR API) and `cloudflared` (which brings visitors in). No ports are published.
+  girloffs:
+    <<: *locked-down
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: girloffs
+    container_name: girloffs
+    user: "99:100"  # Unraid's nobody:users
+    tmpfs: [/tmp]
+    mem_limit: 256m
+    cpus: 1
+    pids_limit: 64
+    volumes:
+      - ./data:/srv/backend/data  # the SQLite database lives here, outside the container
+    environment:
+      - HTTPS_PROXY=http://egress:8888
+      - SERVE_FRONTEND=0
+      # Replay test (Girloffs 2 match on a separate database): uncomment all three,
+      # recreate the container, then run: docker exec girloffs python -m app.manage demo-go2
+      # - DB_PATH=data/demo.db
+      # - FAKE_NOW=2026-04-11T20:45:00Z
+      # - MCSR_SEASON=10
+    networks: [internal]
+
+  # Outbound proxy: only lets the app open HTTPS connections to the hosts in egress/allowlist.
+  egress:
+    <<: *locked-down
+    build: egress
+    image: girloffs-egress
+    container_name: girloffs-egress
+    mem_limit: 64m
+    pids_limit: 32
+    networks: [internal, outside]
+
+  # Cloudflare Tunnel: an outgoing connection to Cloudflare that carries visitors to the app.
+  # Its own tunnel, separate from the rest of the server. Token goes in .env next to this file.
+  cloudflared:
+    <<: *locked-down
+    image: cloudflare/cloudflared:2026.10.3@sha256:faa8e0a1475f137c910be6025f43c8e4092fdd35461b31e19fd1390657a1ff39
+    container_name: girloffs-cloudflared
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN:-}
+      - TUNNEL_TRANSPORT_PROTOCOL=http2  # QUIC has flapped on this network before
+    mem_limit: 128m
+    pids_limit: 64
+    networks: [internal, outside]
+
+networks:
+  internal:
+    internal: true
+  outside: {}
