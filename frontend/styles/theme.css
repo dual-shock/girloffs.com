@@ -110,23 +110,23 @@
         --schedule-bar-hover-bg: var(--box-hover-bg);
 
         /* TBD (no players and no time set) */
-        --schedule-tbd-time-bg: rgba(253, 252, 253, 0.35);
-        --schedule-tbd-time-color: rgba(237, 104, 173, 0.5);
+        --schedule-tbd-time-bg: var(--box-faint-bg);
+        --schedule-tbd-time-color: rgba(255, 255, 255, 0.4);
         --schedule-tbd-bar-bg: var(--box-faint-bg);
         --schedule-tbd-bar-color: rgba(255, 255, 255, 0.4);
         --schedule-tbd-bar-hover-bg: var(--box-faint-hover-bg);
 
         /* ONGOING */
-        --schedule-ongoing-time-bg: var(--white);
-        --schedule-ongoing-time-color: var(--hot-pink);
+        --schedule-ongoing-time-bg: var(--brand-light-pink);
+        --schedule-ongoing-time-color: var(--white);
         --schedule-ongoing-bar-bg: rgba(244, 156, 187, 0.45);
         --schedule-ongoing-bar-color: #FDFCFD;
         --schedule-ongoing-bar-hover-bg: rgba(244, 156, 187, 0.6);
         --schedule-ongoing-status-color: #FDFCFD;
 
         /* NEXT MATCH */
-        --schedule-next-time-bg: var(--white);
-        --schedule-next-time-color: var(--hot-pink);
+        --schedule-next-time-bg: var(--brand-pink);
+        --schedule-next-time-color: var(--white);
         --schedule-next-bar-bg: rgba(242, 106, 141, 0.5);
         --schedule-next-bar-color: var(--white);
         --schedule-next-bar-hover-bg: rgba(242, 106, 141, 0.62);
