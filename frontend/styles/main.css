@@ -800,6 +800,7 @@ main {
     grid-column: 1;
     grid-row: 2 / -1;
     min-height: 0;
+    position: relative;
 }
 
 .player-render img {
@@ -808,6 +809,15 @@ main {
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0.5rem 1rem rgba(0, 0, 0, 0.45));
+}
+
+.player-render.skin-3d img {
+    visibility: hidden;
+}
+
+.player-render canvas {
+    position: absolute;
+    inset: 0;
 }
 
 .player-item {

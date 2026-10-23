@@ -124,3 +124,6 @@ Only things that matter for the design: no task logs, no code details that the C
   Next!/Live!. Rows max 38em wide, centered in each day column. Time cell per state: Next brand pink, Live light
   pink, played faded. Phones (≤700px): the row flows left to right (no room for the aligned columns). Clicking a
   row outlines it in white, like the featured player card. Everything in a row is sized in em from one font size.
+- Players easter egg (owner, 2026-10-23): clicking the featured render swaps it for a rotatable 3D model of their
+  skin (skinview3d, self-hosted in `vendor/`, loaded only on that first click); clicking again swaps back. The
+  render stays the default and there's no visible hint. Skins live in `assets/skins/<seed>.png`.

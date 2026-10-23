@@ -51,8 +51,65 @@ function glideToFeatured(seed, card) {
     step(start);
 }
 
+var skin = null;  // the open 3D model: { seed, viewer, observer }
+var skinviewLoad = null;
+
+// easter egg: clicking the featured render swaps it for a 3D model of their skin, clicking again swaps back
 function buildRender(player) {
-    return buildPicture('assets/players/', player, 'player-render');
+    var picture = buildPicture('assets/players/', player, 'player-render');
+    if (skin && skin.seed !== player.seed) closeSkin();
+    if (skin) mountSkin(picture);  // the page was rebuilt with new data: keep the model and its rotation
+
+    var downX = 0, downY = 0;
+    picture.addEventListener('pointerdown', function(e) { downX = e.clientX; downY = e.clientY; });
+    picture.addEventListener('click', function(e) {
+        if (Math.abs(e.clientX - downX) + Math.abs(e.clientY - downY) > 5) return;  // a drag to rotate, not a click
+        if (skin) closeSkin();
+        else openSkin(player, picture);
+    });
+    return picture;
+}
+
+function openSkin(player, picture) {
+    loadSkinview().then(function(skinview3d) {
+        if (skin || !picture.isConnected) return;
+        var viewer = new skinview3d.SkinViewer({ skin: 'assets/skins/' + player.seed + '.png' });
+        var observer = new ResizeObserver(function(entries) {
+            viewer.setSize(entries[0].contentRect.width, entries[0].contentRect.height);
+        });
+        skin = { seed: player.seed, viewer: viewer, observer: observer };
+        mountSkin(picture);
+    });
+}
+
+function mountSkin(picture) {
+    picture.classList.add('skin-3d');
+    picture.appendChild(skin.viewer.canvas);
+    skin.observer.disconnect();
+    skin.observer.observe(picture);
+}
+
+function closeSkin() {
+    var picture = skin.viewer.canvas.parentNode;
+    if (picture) picture.classList.remove('skin-3d');
+    skin.observer.disconnect();
+    skin.viewer.dispose();
+    skin.viewer.canvas.remove();
+    skin = null;
+}
+
+// the 3D library (~120 KB compressed) is only downloaded the first time someone clicks a render
+function loadSkinview() {
+    if (!skinviewLoad) {
+        skinviewLoad = new Promise(function(resolve, reject) {
+            var script = document.createElement('script');
+            script.src = 'vendor/skinview3d-3.4.2.bundle.js';
+            script.onload = function() { resolve(window.skinview3d); };
+            script.onerror = function() { skinviewLoad = null; reject(); };
+            document.head.appendChild(script);
+        });
+    }
+    return skinviewLoad;
 }
 
 function buildPicture(dir, player, className) {
