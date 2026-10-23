@@ -2,8 +2,18 @@
 
 Website for Girloffs, an MCSR (Minecraft speedrun) tournament. Girloffs 3 runs Sat Oct 24 – Sun Oct 25 2026 (all times UTC): 22 players, single elimination, Bo3 everywhere except the grand final (Bo5), plus a 3rd place match.
 
+Design rules, brand and every design decision so far (read before any frontend work, and record new decisions there immediately):
+@design.md
+
+## Working in parallel sessions
+Several Claude sessions may run at once on this folder. They share the files on disk, so:
+- Stay inside the files your task is about. If you need to change a file another area owns (e.g. shared CSS), say so in your reply instead of silently rewriting it.
+- Re-read a file right before editing it; never revert changes you didn't make.
+- Design decisions go into `.claude/design.md` straight away, so the other sessions pick them up.
+- Never run git commands that touch the working tree (commit, checkout, reset, stash) unless the owner asks.
+
 ## Layout
-- `frontend/`: the public site. Vanilla JS ES modules, no build step, no framework. One file per tab: `bracket.js`, `schedule.js`, `players.js`; `nav.js` = tab switching; `main.js` = fetches `/api/state` every 10s (plus a localStorage copy for an instant first render, also when the API is down) and re-renders when it changed. Styling in `styles/` is unchanged from Girloffs 2 (the redesign is a later phase).
+- `frontend/`: the public site. Vanilla JS ES modules, no build step, no framework. One file per tab: `bracket.js`, `schedule.js`, `players.js`; `nav.js` = tab switching; `main.js` = fetches `/api/state` every 10s (plus a localStorage copy for an instant first render, also when the API is down) and re-renders when it changed; `devreload.js` = local auto-reload (inert on girloffs.com). Styling in `styles/` is still Girloffs 2's; the redesign happens on the `redesign` branch.
 - `backend/app/`: Python FastAPI + stdlib `sqlite3`.
   - `event.py`: seed data (bracket structure, schedule, players). Only used to fill an empty DB; after that the DB is the source of truth.
   - `bracket.py`: `derive_state()`, a pure function that builds the whole bracket from players + matches + games + overrides.
@@ -32,6 +42,8 @@ Website for Girloffs, an MCSR (Minecraft speedrun) tournament. Girloffs 3 runs S
 - Run locally: `.venv/Scripts/python -m uvicorn app.main:app --reload --port 8000` → http://localhost:8000
 - Inspect/correct: `.venv/Scripts/python -m app.manage list` (also `set-time`, `set-winner`, `set-score`, `exclude-game`, `include-game`, `demo-go2`). It prints the DB path first and exits with an error if an ID matches nothing; `DB_PATH` must be set in every shell that should use a non-default DB.
 - Replay test: separate `DB_PATH=data/demo.db`, run `manage demo-go2`, then start the server with `FAKE_NOW=2026-04-11T20:45:00Z MCSR_SEASON=10`.
+- Design server: `DB_PATH=data/design.db POLL_ENABLED=0 DEV_RELOAD=1`, `manage demo-design` once (fake mid-tournament results: finished, forfeit, draw, live 1-0/1-1, upcoming, TBD), then uvicorn with `--reload --timeout-graceful-shutdown 1` (the timeout stops open auto-reload streams from blocking restarts). Both demo commands refuse to run on `girloffs.db`.
+- Assets: `tools/optimize_assets.py` (needs ffmpeg; fonts need fontTools + brotli) converts `girloffs3branding/` and the old `frontend/assets/` into `optimized/` (AVIF/WebP, AV1/H.264, WOFF2) with a README of sizes/quality and a preview.html. libaom in the owner's ffmpeg build randomly fails to start, so the script retries; to redo a single render call `players(only="NAME")` from Python instead of rerunning everything (~10 min).
 - Docker/Unraid: see Production. The compose stack publishes no ports, so to click around locally use the venv server, not Docker. SQLite stays in the default rollback journal: WAL is avoided because Unraid's `/mnt/user` FUSE layer and SQLite WAL don't mix well.
 
 ## Production (decided 2026-10-23: Unraid origin, everything public goes through Cloudflare)

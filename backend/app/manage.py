@@ -4,9 +4,10 @@ Run from the backend folder, e.g.:  python -m app.manage list
 """
 
 import argparse
+import random
 import sys
 from contextlib import closing
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from . import config, db, edits
@@ -62,8 +63,50 @@ def cmd_include_game(conn, args):
     apply(edits.set_game_excluded, conn, args.game, False)
 
 
+def require_separate_db():
+    if Path(config.DB_PATH).name == "girloffs.db":
+        sys.exit("ERROR: demo commands overwrite results. Point DB_PATH at a separate file first, e.g. data/design.db")
+
+
+# Fake results for designing: every look a match can have. Per match, the game winners by slot
+# ("1" = slot 1, "2" = slot 2, "d" = draw), or "forfeit:N" = slot N wins by forfeit. Applied in match order,
+# so later matches get the right players. Leaves 8 and 16 upcoming with known players, 12 live at 1-0,
+# 13 live at 1-1, and 17-22 TBD (19 half known).
+DESIGN_RESULTS = {
+    1: "121", 2: "22", 3: "211", 4: "11", 5: "forfeit:2", 6: "1d22",
+    7: "212", 9: "11", 10: "122", 11: "11", 12: "1", 13: "12", 14: "22",
+    15: "121",
+}
+
+
+def cmd_demo_design(conn, args):
+    """Fill a separate database with a believable mid-tournament bracket."""
+    require_separate_db()
+    uuids = dict(conn.execute("SELECT seed, uuid FROM players").fetchall())
+    durations = random.Random(3)
+    for number in sorted(DESIGN_RESULTS):
+        plan = DESIGN_RESULTS[number]
+        m = next(x for x in derive_state(*db.load(conn), config.now())["matches"] if x["number"] == number)
+        pair = m["players"]
+        if plan.startswith("forfeit:"):
+            edits.edit_match(conn, number, {"winner_override": pair[int(plan[-1]) - 1], "forfeit": True}, "demo")
+            continue
+        start = datetime.fromisoformat(m["scheduled_at"])
+        db.insert_games(conn, number, [{
+            "mcsr_id": 900_000_000 + number * 10 + i,
+            "played_at": int((start + timedelta(minutes=12 + 14 * i)).timestamp()),
+            "player1_uuid": uuids[pair[0]],
+            "player2_uuid": uuids[pair[1]],
+            "winner_uuid": None if w == "d" else uuids[pair[int(w) - 1]],
+            "duration_ms": durations.randint(8 * 60_000, 16 * 60_000),
+            "forfeited": 0,
+        } for i, w in enumerate(plan)])
+    print("Design data loaded: finished, forfeit, live, upcoming and TBD matches are all on the bracket now.")
+
+
 def cmd_demo_go2(conn, args):
     """Turn match 1 into Girloffs 2's rain_betwixt vs Dawn357x (2-1, Apr 11) for a replay test."""
+    require_separate_db()
     conn.execute("UPDATE players SET uuid = ?, mc_name = ?, display_name = ? WHERE seed = 16",
                  ("93480920473541999c94b7dcd4075565", "rain_betwixt", "rain"))
     conn.execute("UPDATE players SET uuid = ?, mc_name = ?, display_name = ? WHERE seed = 17",
@@ -104,6 +147,7 @@ def main():
     p.set_defaults(fn=cmd_include_game)
 
     sub.add_parser("demo-go2", help="set up the Girloffs 2 replay test (use a separate DB_PATH!)").set_defaults(fn=cmd_demo_go2)
+    sub.add_parser("demo-design", help="fake mid-tournament results for designing (use a separate DB_PATH!)").set_defaults(fn=cmd_demo_design)
 
     args = parser.parse_args()
     print(f"database: {Path(config.DB_PATH).resolve()}", flush=True)

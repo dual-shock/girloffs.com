@@ -8,6 +8,7 @@ POLL_SECONDS = int(os.environ.get("POLL_SECONDS", "10"))
 MCSR_SEASON = os.environ.get("MCSR_SEASON") or None  # None = current season
 SERVE_FRONTEND = os.environ.get("SERVE_FRONTEND", "1") == "1"
 FRONTEND_DIR = os.environ.get("FRONTEND_DIR", str(Path(__file__).resolve().parents[2] / "frontend"))
+DEV_RELOAD = os.environ.get("DEV_RELOAD") == "1"  # local design work: browser tabs reload when frontend/ changes
 FAKE_NOW = os.environ.get("FAKE_NOW")  # e.g. "2026-04-11T20:45:00Z", for replay testing only
 
 # Admin panel login (Cloudflare Access). Empty values count as unset: compose passes "" for missing .env entries.

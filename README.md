@@ -18,6 +18,18 @@ cd X:\repos\girloffs.com\backend
 ```
 The first start creates `backend/data/girloffs.db` from `backend/app/event.py`. Delete that file to start over from scratch.
 
+## Designing locally (auto-reload + fake results)
+In a PowerShell window (the env vars stay set until you close it):
+```powershell
+cd X:\repos\girloffs.com\backend
+$env:DB_PATH = "data/design.db"; $env:POLL_ENABLED = "0"; $env:DEV_RELOAD = "1"
+.venv\Scripts\python -m app.manage demo-design      # once: fills design.db with a mid-tournament bracket
+.venv\Scripts\python -m uvicorn app.main:app --reload --timeout-graceful-shutdown 1 --port 8000
+```
+Open http://localhost:8000 in as many windows/responsive modes as you like. Saving any file in `frontend/` updates every open window by itself: CSS that's linked directly is swapped without a reload (scroll position stays), anything else reloads the page. The fake bracket has finished, forfeit, live (1-0 and 1-1), upcoming and TBD matches. Delete `backend\data\design.db` and run `demo-design` again to reset it.
+
+Phone on the same wifi: add `--host 0.0.0.0`, open `http://<this PC's IP>:8000` on the phone, and allow Python through Windows Firewall for **Private networks** only.
+
 ## Tests
 ```powershell
 .venv\Scripts\python -m pytest              # offline tests, uses saved API responses

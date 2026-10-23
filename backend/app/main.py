@@ -7,7 +7,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import admin, config, db, poller
+from . import admin, config, db, devreload, poller
 from .bracket import derive_state
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -47,6 +47,16 @@ def health():
 
 
 app.include_router(admin.router)
+
+if config.DEV_RELOAD:
+    app.include_router(devreload.router)
+
+    @app.middleware("http")
+    async def always_fresh(request, call_next):
+        # local design work: the browser must never reuse an old copy of a CSS/JS file
+        response = await call_next(request)
+        response.headers["Cache-Control"] = "no-store"
+        return response
 
 
 # Local testing: serve the site from the same server. Mounted last so /api and /health win.
