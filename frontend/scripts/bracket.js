@@ -79,13 +79,13 @@ function createMatch(match, playerMap, byNumber) {
         showMatch(match.number);
     });
 
-    el.appendChild(createRow(match.players[0], match.score[0], match.winner, playerMap));
-    el.appendChild(createRow(match.players[1], match.score[1], match.winner, playerMap));
+    el.appendChild(createRow(match.players[0], match.score[0], match.winner, playerMap, match.forfeit));
+    el.appendChild(createRow(match.players[1], match.score[1], match.winner, playerMap, match.forfeit));
 
     return el;
 }
 
-function createRow(seed, score, winner, playerMap) {
+function createRow(seed, score, winner, playerMap, forfeit) {
     const row = document.createElement('div');
     row.className = 'match-row';
 
@@ -110,6 +110,10 @@ function createRow(seed, score, winner, playerMap) {
             showPlayer(seed);
         });
         name.appendChild(nameLink);
+        if (forfeit && winner && winner !== seed) {
+            nameLink.classList.add('dq');
+            name.appendChild(document.createTextNode(' (DQ)'));
+        }
     } else {
         var tbdSpan = document.createElement('span');
         tbdSpan.className = 'player-name-tbd';

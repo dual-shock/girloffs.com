@@ -497,6 +497,11 @@ main:has(#credits.active) {
     text-decoration: underline;
 }
 
+.player-name-link.dq,
+.player-name-link.dq:hover {
+    text-decoration: line-through;
+}
+
 .player-name-tbd {
     opacity: 0.4;
 }

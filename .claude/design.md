@@ -131,3 +131,5 @@ Only things that matter for the design: no task logs, no code details that the C
   skin (skinview3d, self-hosted in `vendor/`, loaded only on that first click); clicking again swaps back. The
   render stays the default and there's no visible hint. Skins live in `assets/skins/<seed>.png`. Only a click on
   the player itself counts (a visible pixel of the render or the 3D model), not the transparent space around it.
+- Admin panel (owner, 2026-10-24): should not look like a default generated panel. Square corners, tight padding,
+  small uppercase labels, boxed status badges, game rows in aligned columns. Same colours, light and dark.

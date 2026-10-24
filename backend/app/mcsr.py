@@ -33,11 +33,12 @@ async def lookup_user(client, name):
 
 
 def select_games(raw, uuid1, uuid2, since):
-    """Keep only private-room/event games between exactly these two players, played after `since` (epoch seconds)."""
+    """Keep only private-room/event games both these players were in, played after `since` (epoch seconds).
+    The room host can be listed as a player too, so extra players are allowed."""
     games = []
     for m in raw:
         uuids = {p["uuid"] for p in m["players"]}
-        if m["type"] not in TOURNAMENT_TYPES or uuids != {uuid1, uuid2}:
+        if m["type"] not in TOURNAMENT_TYPES or not {uuid1, uuid2} <= uuids:
             continue
         if m["date"] < since or m.get("decayed"):
             continue

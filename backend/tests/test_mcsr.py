@@ -26,6 +26,13 @@ def test_select_games_skips_ranked_and_old_games():
     assert len(mcsr.select_games(fixture("oxidiot_vs_wagasuner_s10"), OXIDIOT, WAGASUNER, epoch("2026-04-19T19:00:00Z"))) == 3
 
 
+def test_select_games_allows_room_host_in_players():
+    # Girloffs 3 rooms list the host (ponyashyc) as a third player
+    raw = [{"id": 1, "type": 3, "date": 100, "players": [{"uuid": "host"}, {"uuid": "a"}, {"uuid": "b"}],
+            "result": {"uuid": "a", "time": 1000}, "forfeited": False, "decayed": False}]
+    assert [g["winner_uuid"] for g in mcsr.select_games(raw, "a", "b", 0)] == ["a"]
+
+
 def fake_client(name, calls):
     def handler(request):
         calls.append(str(request.url))
